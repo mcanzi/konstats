@@ -1,0 +1,44 @@
+---
+title: "Weekly assignment"
+subtitle: "Tutorial 1"
+author: "Your name (matriculation number)"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: darkly
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+<!-- Put the number of the tutorial in `subtitle` and your name and
+matriculation number in `author`. Answer each exercise in its own section,
+with your code in chunks and your answer in a sentence or two under it.
+Knit the file before you hand in the .Rmd, to check that it runs from top to
+bottom. -->
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(simling)
+```
+
+## Exercise 1
+
+```{r}
+
+```
+
+## Exercise 2
+
+```{r}
+
+```
+
+## Exercise 3
+
+```{r}
+
+```

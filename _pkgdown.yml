@@ -1,0 +1,54 @@
+url: https://mcanzi.de/konstats/
+
+template:
+  bootstrap: 5
+  theme: a11y-dark
+  bslib:
+    bg: "#0b110e"
+    fg: "#e3e8e1"
+    primary: "#f2d45c"
+    secondary: "#8e9e96"
+    link-color: "#72c699"
+    link-hover-color: "#f2d45c"
+    code-color: "#00a9e0"
+    border-color: "#24332c"
+    navbar-bg: "#0b110e"
+    base_font: "Atkinson Hyperlegible"
+    heading_font: "Bricolage Grotesque"
+    code_font: "JetBrains Mono"
+  includes:
+    in_header: <link rel="stylesheet" href="https://mcanzi.de/fonts/fonts.css">
+
+navbar:
+  structure:
+    left: [intro, reference, news]
+    right: [search, website, github]
+  components:
+    website:
+      text: mcanzi.de
+      href: https://mcanzi.de/
+      aria-label: Massimiliano Canzi's website
+
+reference:
+- title: Getting ready
+  contents:
+  - check_setup
+  - install_course
+  - course_packages
+- title: Lectures and slides
+  contents:
+  - lectures
+  - slides
+- title: Exercise sheets
+  contents:
+  - tutorials
+  - get_tutorial
+- title: Helpers from the slides
+  contents:
+  - resid_acf
+  - partial_dependence
+  - cv_speakers
+  - theme_paper
+- title: Package
+  contents:
+  - konstats-package

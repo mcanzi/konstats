@@ -1,0 +1,6 @@
+name: Weekly assignment (konstats)
+description: >
+  The file you hand in each week in Statistics and Advanced Statistics,
+  with your name and matriculation number at the top and a section for
+  each exercise.
+create_dir: false
