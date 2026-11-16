@@ -53,7 +53,8 @@ slides("random forests", course = "advanced")
 
 Each tutorial has an exercise sheet: an R Markdown file with the
 exercises and an empty code chunk for each answer. Some sheets end with
-a weekly assignment, which you complete at home.
+a weekly assignment, which you complete at home. In Advanced Statistics,
+the practical lectures 4, 6, 9 and 11 have a sheet each.
 [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
 copies a sheet into your project folder, or all of them at once:
 
@@ -62,6 +63,7 @@ copies a sheet into your project folder, or all of them at once:
 tutorials()
 get_tutorial(4, ".")
 get_tutorial("all", ".")
+get_tutorial(4, ".", course = "advanced")
 ```
 
 You write your answers in the copy, and a sheet that is already in the
