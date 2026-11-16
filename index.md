@@ -52,8 +52,8 @@ slides("random forests", course = "advanced")
 ### Exercise sheets
 
 Each tutorial has an exercise sheet: an R Markdown file with the
-exercises and an empty code chunk for each answer. The last exercises
-are the weekly assignment.
+exercises and an empty code chunk for each answer. Some sheets end with
+a weekly assignment, which you complete at home.
 [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
 copies a sheet into your project folder, or all of them at once:
 
@@ -70,8 +70,8 @@ folder is never overwritten unless you ask.
 ### Weekly assignments
 
 In RStudio, *File \> New File \> R Markdown \> From Template \> Weekly
-assignment (konstats)* starts the file you hand in each week, with a
-section per exercise.
+assignment (konstats)* starts the file you hand in for a weekly
+assignment, with a section per exercise.
 
 ### Helpers from the slides
 

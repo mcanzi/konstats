@@ -20,7 +20,7 @@
   lists the exercise sheets and
   [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
   copies them into a project folder, one at a time or all at once with
-  `get_tutorial("all", dir)`. Sheets for Statistics tutorials 2 to 4.
+  `get_tutorial("all", dir)`. Sheets for Statistics tutorials 2 to 12.
 - An R Markdown template for the weekly assignments.
 - The helpers of the Advanced Statistics slides:
   [`resid_acf()`](https://mcanzi.de/konstats/reference/resid_acf.md)
