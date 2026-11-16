@@ -4,15 +4,15 @@ template:
   bootstrap: 5
   theme: a11y-dark
   bslib:
-    bg: "#0b110e"
-    fg: "#e3e8e1"
+    bg: "#06121a"
+    fg: "#dcefec"
     primary: "#f4ecdb"
-    secondary: "#8e9e96"
-    link-color: "#72c699"
+    secondary: "#8fb3b6"
+    link-color: "#6cd8cf"
     link-hover-color: "#f4ecdb"
-    code-color: "#00a9e0"
-    border-color: "#24332c"
-    navbar-bg: "#0b110e"
+    code-color: "#f4ecdb"
+    border-color: "#193744"
+    navbar-bg: "#06121a"
     base_font: "Atkinson Hyperlegible"
     heading_font: "Bricolage Grotesque"
     code_font: "JetBrains Mono"
