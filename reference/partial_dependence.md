@@ -10,7 +10,7 @@ that has a [`predict()`](https://rdrr.io/r/stats/predict.html) method.
 ## Usage
 
 ``` r
-partial_dependence(model, data, var, values, class = NULL)
+partial_dependence(model, data, var, values, class = NULL, ...)
 ```
 
 ## Arguments
@@ -37,6 +37,13 @@ partial_dependence(model, data, var, values, class = NULL)
 
   For models that predict a probability for each class: the class whose
   probability to average, such as `"deleted"`.
+
+- ...:
+
+  Passed on to [`predict()`](https://rdrr.io/r/stats/predict.html). For
+  a logistic regression from
+  [`glm()`](https://rdrr.io/r/stats/glm.html), use `type = "response"`
+  to average probabilities instead of log-odds.
 
 ## Value
 
@@ -83,4 +90,14 @@ if (requireNamespace("ranger", quietly = TRUE)) {
 #> 5    60      0.514
 #> 6    70      0.497
 #> 7    80      0.410
+
+# a logistic regression: average the probabilities, not the log-odds
+m <- glm(deleted ~ age + rate, data = td_deletion, family = binomial)
+partial_dependence(m, td_deletion, "age", c(20, 50, 80), type = "response")
+#> # A tibble: 3 × 2
+#>   value prediction
+#>   <dbl>      <dbl>
+#> 1    20      0.749
+#> 2    50      0.579
+#> 3    80      0.389
 ```

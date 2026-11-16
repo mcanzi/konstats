@@ -1,9 +1,9 @@
 # Check that your computer is ready for a course
 
 Reports your version of R and checks that every package the course uses
-is installed. For Advanced Statistics it also checks that simling is
-recent enough to have all the data sets of the course. Run it before the
-first session, and again whenever course code fails on your computer.
+is installed. It also checks that your version of simling has every data
+set the slides of the course use. Run it before the first session, and
+again whenever course code fails on your computer.
 
 ## Usage
 

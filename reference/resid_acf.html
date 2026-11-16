@@ -80,7 +80,8 @@ same with base R graphics.</p>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A tibble with one row per lag and the columns <code>lag</code> and <code>acf</code>.
-The autocorrelation at lag 0 is always 1.</p>
+The autocorrelation at lag 0 is always 1. It is <code>NA</code> at lags as long as
+the groups, where there are too few pairs of residuals left.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

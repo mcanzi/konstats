@@ -33,7 +33,8 @@ resid_acf(res, group, max_lag = 8)
 ## Value
 
 A tibble with one row per lag and the columns `lag` and `acf`. The
-autocorrelation at lag 0 is always 1.
+autocorrelation at lag 0 is always 1. It is `NA` at lags as long as the
+groups, where there are too few pairs of residuals left.
 
 ## Details
 

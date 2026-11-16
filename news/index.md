@@ -9,7 +9,8 @@
   [`course_packages()`](https://mcanzi.de/konstats/reference/course_packages.md)
   lists them all.
 - [`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
-  checks the version of R and the packages of a course.
+  checks the version of R, the packages of a course and that simling has
+  the data sets its slides use.
 - [`lectures()`](https://mcanzi.de/konstats/reference/lectures.md) lists
   the lectures of both courses with the chapters of Winter
   2019. they follow, the data sets they use and their slides;
@@ -18,8 +19,8 @@
 - [`tutorials()`](https://mcanzi.de/konstats/reference/tutorials.md)
   lists the exercise sheets and
   [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
-  copies one into a project folder. Sheets for Statistics tutorials 2 to
-  4.
+  copies them into a project folder, one at a time or all at once with
+  `get_tutorial("all", dir)`. Sheets for Statistics tutorials 2 to 4.
 - An R Markdown template for the weekly assignments.
 - The helpers of the Advanced Statistics slides:
   [`resid_acf()`](https://mcanzi.de/konstats/reference/resid_acf.md)

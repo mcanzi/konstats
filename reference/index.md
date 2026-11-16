@@ -21,7 +21,7 @@
 - [`tutorials()`](https://mcanzi.de/konstats/reference/tutorials.md) :
   The weekly exercise sheets
 - [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
-  : Copy an exercise sheet into your project
+  : Copy exercise sheets into your project
 
 ## Helpers from the slides
 

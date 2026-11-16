@@ -4,7 +4,8 @@ Lists the exercise sheets that come with konstats. Each sheet is an R
 Markdown file with the exercises of one tutorial and an empty code chunk
 for each answer; the last exercises are the weekly assignment. Copy one
 into your project folder with
-[`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md).
+[`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md),
+or all of them with `get_tutorial("all", dir)`.
 
 ## Usage
 
