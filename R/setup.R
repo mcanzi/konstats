@@ -132,6 +132,7 @@ packages_meta <- function() {
     "advanced", "psych", "Factor analysis",
     "advanced", "GPArotation", "Rotations for factor analysis",
     "advanced", "lavaan", "Confirmatory factor analysis",
+    "advanced", "cluster", "Silhouettes and k-medoids for cluster analysis",
     "advanced", "patchwork", "Combining figures",
     "advanced", "ggeffects", "Model predictions for figures",
     "advanced", "ggrepel", "Labels that do not overlap",

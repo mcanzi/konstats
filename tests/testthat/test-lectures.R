@@ -1,8 +1,8 @@
-test_that("lectures() lists 13 + 11 lectures, numbered from 1", {
+test_that("lectures() lists 13 + 12 lectures, numbered from 1", {
   lecs <- lectures()
   expect_s3_class(lecs, "tbl_df")
   expect_identical(nrow(lectures("statistics")), 13L)
-  expect_identical(nrow(lectures("advanced")), 11L)
+  expect_identical(nrow(lectures("advanced")), 12L)
   for (course in c("statistics", "advanced")) {
     expect_identical(lectures(course)$number, seq_len(nrow(lectures(course))))
   }
@@ -23,10 +23,9 @@ test_that("slide addresses point to the course folders", {
 
 test_that("slides() finds a lecture by its topic", {
   expect_identical(slides("Random forests", course = "advanced", open = FALSE), "https://mcanzi.de/advanced_statistics/05_random_forests.html")
-  expect_error(slides("in practice", course = "advanced", open = FALSE), "matches 3 lectures")
+  expect_error(slides("in practice", course = "advanced", open = FALSE), "matches 4 lectures")
   expect_error(slides("bayes", open = FALSE), "No lecture")
   expect_error(slides(20, open = FALSE), "no lecture 20")
-  expect_error(slides(10, course = "advanced", open = FALSE), "not online yet")
   expect_error(slides(c(1, 2), open = FALSE), "one lecture")
   expect_error(slides(" ", open = FALSE), "one lecture")
   # a topic is matched as text, not as a regular expression

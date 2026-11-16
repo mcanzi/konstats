@@ -128,7 +128,8 @@ lectures_meta <- function() {
     "advanced", 7L, "Power analysis", NA, "naming_pilot", "07_power_analysis",
     "advanced", 8L, "Factor analysis", NA, "language_attitudes", "08_factor_analysis",
     "advanced", 9L, "Factor analysis in practice", NA, "web_registers", "09_factor_analysis_practical",
-    "advanced", 10L, "Cluster analysis", NA, NA, NA,
-    "advanced", 11L, "Figures for publication", NA, "lexical_decision_l2", "11_figures"
+    "advanced", 10L, "Cluster analysis", NA, "korean_stops", "10_cluster_analysis",
+    "advanced", 11L, "Cluster analysis in practice", NA, "web_registers", "11_cluster_analysis_practical",
+    "advanced", 12L, "Figures for publication", NA, "lexical_decision_l2", "12_figures"
   )
 }

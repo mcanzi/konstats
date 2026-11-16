@@ -1,0 +1,186 @@
+---
+title: "Random forests in practice"
+subtitle: "Tutorial 6"
+author: "Dr Massimiliano Canzi"
+output:
+  html_document:
+    theme: darkly
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+These exercises follow the tasks on the slides of lecture 6, "Random forests in practice". Write your code in the empty chunks, and answer the questions in a sentence or two under each chunk. Section 4 goes beyond the slides.
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(ranger)
+library(simling)
+```
+
+## The data
+
+`accent` comes from a simulated accent study in which 30 speakers, 15 with English as their L1 and 15 Italian learners of English, read 40 English words each. Each token has six acoustic measures: `vot` (ms), `vowel_ratio`, `rate` (syllables per second), `f0` (Hz), `h1h2` (dB) and `intensity` (dB).
+
+```{r}
+glimpse(accent)
+```
+
+The research question: can the acoustic measures tell an L1 English speaker from an Italian learner? `?accent` gives the true model. Leave it closed until you have finished section 3.
+
+---
+
+## 1. Look at the data
+
+### 1.1 Tokens
+
+How many tokens are there per speaker, and how many speakers per L1?
+
+```{r}
+
+```
+
+### 1.2 Speaker means
+
+Compute each speaker's mean for each of the six measures, and plot them by L1, with a panel for each measure. Which measures separate the groups?
+
+```{r}
+
+```
+
+### 1.3 The baseline
+
+What accuracy would you get by always guessing the same L1?
+
+```{r}
+
+```
+
+---
+
+## 2. A first forest
+
+### 2.1 Fit a forest
+
+Fit a random forest with all six measures and 1,000 trees, and ask for permutation importance. Complete the call:
+
+```{r, eval = FALSE}
+f_all <- l1 ~ vot + vowel_ratio + rate + f0 + h1h2 + intensity
+rf_all <- ranger(f_all, data = accent, num.trees = 1000, importance = ___, seed = 1)
+```
+
+What is the OOB accuracy (`1 - rf_all$prediction.error`), and how does it compare with the baseline?
+
+```{r}
+
+```
+
+### 2.2 Variable importance
+
+Plot the permutation importance of the six measures. f0 and H1–H2 have no link with L1 in the simulation. Why could the forest find them useful?
+
+```{r}
+
+```
+
+### 2.3 Speaker fingerprints
+
+Plot every token's f0 by speaker, with the speakers ordered by their mean f0 and coloured by L1. How does this plot explain the importance of f0?
+
+```{r}
+
+```
+
+---
+
+## 3. New speakers
+
+### 3.1 Cross-validation by speaker
+
+Complete the test set in this function, which fits a forest on four fifths of the speakers and predicts the other fifth, five times:
+
+```{r, eval = FALSE}
+set.seed(2)
+folds <- distinct(accent, speaker, l1) |>
+  mutate(fold = sample(rep(1:5, length.out = n())), .by = l1)
+cv_speakers <- function(formula) {
+  map(1:5, \(k) {
+    train <- filter(accent, speaker %in% folds$speaker[folds$fold != k])
+    test <- filter(accent, speaker %in% ___)
+    m <- ranger(formula, data = train, num.trees = 500, seed = k)
+    tibble(speaker = test$speaker, l1 = test$l1, pred = predict(m, test)$predictions)
+  }) |> list_rbind()
+}
+```
+
+Run `cv_speakers(f_all)`, and compute the accuracy on held-out speakers. `{konstats}` has a finished version of this function, `konstats::cv_speakers()`.
+
+```{r}
+
+```
+
+### 3.2 Fewer predictors
+
+Refit with only `vot`, `vowel_ratio` and `rate`. Compare the OOB accuracy and the speaker-wise cross-validated accuracy of both forests. Which forest would you trust for new speakers?
+
+```{r}
+
+```
+
+### 3.3 From tokens to speakers
+
+For each held-out speaker in `cv_l1`, take the L1 that most of their 40 tokens were assigned to. How many of the 30 speakers are classified correctly?
+
+```{r}
+
+```
+
+### 3.4 Partial dependence
+
+Fit a probability forest with the three measures on all data, and draw a partial dependence plot for VOT, from 10 to 110 ms, as in lecture 5. In which VOT range does the predicted probability of an Italian L1 change most? `konstats::partial_dependence()` does the same for any model.
+
+```{r}
+
+```
+
+### 3.5 Report
+
+Write a short methods and results paragraph with the number of trees, `mtry` and the seed, why you kept the predictors you kept, how accuracy was estimated and why OOB accuracy was not enough, and the token and speaker accuracy against the baseline. Then open `?accent`: did the forest find the measures that were built in?
+
+---
+
+## 4. Beyond the slides
+
+### 4.1 Tuning `mtry`
+
+Tune `mtry` for the three-measure forest, with speaker-wise cross-validation and not the OOB error. Adapt `cv_speakers()` so that it passes `mtry` on to `ranger()`, and try `mtry` from 1 to 3.
+
+```{r}
+
+```
+
+### 4.2 A mixed model
+
+Fit a mixed logistic regression with the three standardised measures and a random intercept by speaker:
+
+```{r, eval = FALSE}
+lme4::glmer(l1 ~ scale(vot) + scale(vowel_ratio) + scale(rate) + (1 | speaker),
+            data = accent, family = binomial)
+```
+
+What does the mixed model tell you that the forest does not, and what does it fail to see?
+
+```{r}
+
+```
+
+### 4.3 The trap with a single measure
+
+Fit a forest with `f0` as its only predictor. Compare its OOB accuracy with its accuracy on held-out speakers. What does the difference tell you?
+
+```{r}
+
+```

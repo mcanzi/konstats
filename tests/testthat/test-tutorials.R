@@ -3,11 +3,15 @@ test_that("tutorials() lists the sheets with their lecture and topic", {
   expect_s3_class(sheets, "tbl_df")
   expect_gt(nrow(sheets), 0)
   lecs <- lectures()
-  for (i in seq_len(nrow(sheets))) {
+  # a guided tutorial (Statistics tutorial 1) has a title of its own
+  guided <- vapply(konstats:::tutorial_files("statistics"), \(f) any(readLines(f, n = 10) == "guided: true"), logical(1))
+  guided <- sheets$course == "statistics" & sheets$file %in% basename(names(guided)[guided])
+  for (i in which(!guided)) {
     lec <- lecs[lecs$course == sheets$course[i] & lecs$number == sheets$number[i], ]
     expect_identical(sheets$topic[i], lec$topic, label = sheets$file[i])
   }
   expect_identical(sort(lecs$number[lecs$tutorial & lecs$course == "statistics"]), sort(tutorials("statistics")$number))
+  expect_identical(lecs$number[lecs$tutorial & lecs$course == "advanced"], c(4L, 6L, 9L, 11L))
 })
 
 test_that("no sheet contains solutions", {

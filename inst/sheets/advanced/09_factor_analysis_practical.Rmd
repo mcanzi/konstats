@@ -1,0 +1,159 @@
+---
+title: "Factor analysis in practice"
+subtitle: "Tutorial 9"
+author: "Dr Massimiliano Canzi"
+output:
+  html_document:
+    theme: darkly
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+These exercises follow the tasks on the slides of lecture 9, "Factor analysis in practice". Write your code in the empty chunks, and answer the questions in a sentence or two under each chunk. Section 4 goes beyond the slides.
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(psych)
+library(simling)
+```
+
+## The data
+
+`web_registers` is a simulated corpus of 480 English web texts from six registers, modelled on the web register data of Ehret and Taboada (2021). For each text, it has 16 features per 1,000 words and the mean word length (`word_length`). `?web_registers` describes each feature, and gives the true model: leave that part closed until exercise 3.2.
+
+```{r}
+glimpse(web_registers)
+```
+
+The research question: along which dimensions do web texts vary, and where do the registers fall on them?
+
+---
+
+## 1. Look at the data
+
+### 1.1 Texts and registers
+
+How many texts are there per register, and how long are they?
+
+```{r}
+
+```
+
+### 1.2 Register profiles
+
+Standardise each feature and compute its mean per register. Plot the result as a heat map, with registers on the `x` axis and features on the `y` axis. Which features separate the registers?
+
+```{r}
+
+```
+
+### 1.3 Correlations
+
+Plot the correlation matrix of the 17 features, as in lecture 8.
+
+```{r}
+
+```
+
+---
+
+## 2. Checking the data
+
+### 2.1 KMO and Bartlett's test
+
+Run both checks on the 17 features. Read every message and warning R prints: what do they tell you?
+
+```{r, error = TRUE}
+KMO(features)
+cortest.bartlett(cor(features), n = nrow(features))
+```
+
+### 2.2 Find the problem
+
+The eigenvector of the smallest eigenvalue shows which features are a linear combination of others. Which features have weights that are not zero? Look at their values in the data, and fix the problem.
+
+```{r, eval = FALSE}
+e <- eigen(cor(features))
+min(e$values)
+round(e$vectors[, which.min(e$values)], 2)
+```
+
+```{r}
+
+```
+
+### 2.3 How many dimensions?
+
+Without `pronouns`, run `KMO()` and Bartlett's test again. Then run a parallel analysis, as in lecture 8, and draw the scree plot with the eigenvalues of random data. How many dimensions do you keep?
+
+```{r}
+
+```
+
+---
+
+## 3. Dimensions
+
+### 3.1 Fit and name the dimensions
+
+Fit a factor analysis with minimum residual extraction and promax rotation, with the number of factors from exercise 2.3:
+
+```{r, eval = FALSE}
+mda <- fa(features, nfactors = ___, rotate = "promax", fm = "minres")
+print(mda$loadings, cutoff = 0.3, sort = TRUE)
+round(mda$Phi, 2)
+```
+
+For each factor, list the features with positive and with negative loadings, and give each dimension a name that covers both poles. Which features load on more than one factor, and how strongly are the factors correlated?
+
+```{r}
+
+```
+
+### 3.2 Compare with the truth
+
+Open `?web_registers` and compare your loadings with the true ones. Which loadings did the factor analysis underestimate? Why could rare features such as `conjuncts` come out weaker?
+
+### 3.3 Dimension scores
+
+`fa()` also gives each text a score on each factor (`mda$scores`). Compute the mean and standard deviation of the scores per register on each dimension, and plot the registers on each dimension. Which register is the most involved? Which is the most narrative?
+
+```{r}
+
+```
+
+### 3.4 Report
+
+Write a short methods and results paragraph: how many texts and features went into the analysis and why `pronouns` did not, KMO, the number of factors and how you chose it, the extraction method, the rotation and the cutoff for salient loadings, and the dimensions with their names and the place of the registers on them.
+
+---
+
+## 4. Beyond the slides
+
+### 4.1 Log rates
+
+Rates per 1,000 words are skewed, and rare features are noisy in short texts. Refit the factor analysis with `log(x + 0.5)` for every feature except `word_length`. Do the loadings get closer to those in `?web_registers`?
+
+```{r}
+
+```
+
+### 4.2 Biber's scores
+
+Compute dimension scores as Biber (1988) did: standardise the features, add up those with salient positive loadings on a dimension and subtract those with salient negative loadings. How closely do they follow `mda$scores`?
+
+```{r}
+
+```
+
+### 4.3 Texts on two dimensions
+
+To prepare for the cluster analysis lectures, plot every text on the first two dimensions, coloured by register. Do the registers form groups?
+
+```{r}
+
+```

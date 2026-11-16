@@ -42,6 +42,7 @@ Imports:
     tidyverse,
     utils
 Suggests:
+    cluster,
     GPArotation,
     ggeffects,
     ggrepel,
