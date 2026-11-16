@@ -53,7 +53,7 @@ The path of the copied sheet, invisibly.
 dir <- tempfile()
 dir.create(dir)
 get_tutorial(4, dir, open = FALSE)
-#> ✔ Copied tutorial 4 to /tmp/RtmpJtv9k3/file19c16d8c8a82/04_linear_models.Rmd.
+#> ✔ Copied tutorial 4 to /tmp/RtmpyGY86G/file1902691160ac/04_linear_models.Rmd.
 list.files(dir)
 #> [1] "04_linear_models.Rmd"
 ```
