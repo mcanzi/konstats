@@ -6,10 +6,10 @@ template:
   bslib:
     bg: "#0b110e"
     fg: "#e3e8e1"
-    primary: "#f2d45c"
+    primary: "#f4ecdb"
     secondary: "#8e9e96"
     link-color: "#72c699"
-    link-hover-color: "#f2d45c"
+    link-hover-color: "#f4ecdb"
     code-color: "#00a9e0"
     border-color: "#24332c"
     navbar-bg: "#0b110e"
