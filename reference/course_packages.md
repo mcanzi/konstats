@@ -38,7 +38,7 @@ A tibble with one row per package and course, and the columns:
 
 ``` r
 course_packages()
-#> # A tibble: 29 × 3
+#> # A tibble: 30 × 3
 #>    course     package        use                                    
 #>    <chr>      <chr>          <chr>                                  
 #>  1 statistics tidyverse      Data wrangling and figures             
@@ -51,9 +51,9 @@ course_packages()
 #>  8 statistics lmerTest       p-values for mixed models              
 #>  9 statistics simr           Power analysis by simulation           
 #> 10 statistics swirl          Interactive R lessons                  
-#> # ℹ 19 more rows
+#> # ℹ 20 more rows
 course_packages("advanced")
-#> # A tibble: 19 × 3
+#> # A tibble: 20 × 3
 #>    course   package     use                                           
 #>    <chr>    <chr>       <chr>                                         
 #>  1 advanced simling     Simulated linguistic data sets                
@@ -71,8 +71,9 @@ course_packages("advanced")
 #> 13 advanced GPArotation Rotations for factor analysis                 
 #> 14 advanced lavaan      Confirmatory factor analysis                  
 #> 15 advanced cluster     Silhouettes and k-medoids for cluster analysis
-#> 16 advanced patchwork   Combining figures                             
-#> 17 advanced ggeffects   Model predictions for figures                 
-#> 18 advanced ggrepel     Labels that do not overlap                    
-#> 19 advanced ggridges    Ridgeline plots                               
+#> 16 advanced mclust      Gaussian mixtures and the adjusted Rand index 
+#> 17 advanced patchwork   Combining figures                             
+#> 18 advanced ggeffects   Model predictions for figures                 
+#> 19 advanced ggrepel     Labels that do not overlap                    
+#> 20 advanced ggridges    Ridgeline plots                               
 ```

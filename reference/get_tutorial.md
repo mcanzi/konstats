@@ -56,20 +56,20 @@ The paths of the sheets in `dir`, invisibly.
 dir <- tempfile()
 dir.create(dir)
 get_tutorial(4, dir, open = FALSE)
-#> ✔ Copied tutorial 4 to /tmp/RtmpFXuMyp/file193766d6e567/04_linear_models.Rmd.
+#> ✔ Copied tutorial 4 to /tmp/Rtmp9CGCbg/file18794da2a507/04_linear_models.Rmd.
 get_tutorial("all", dir)
-#> ℹ Kept /tmp/RtmpFXuMyp/file193766d6e567/04_linear_models.Rmd, which is already there.
-#> ✔ Copied tutorial 1 to /tmp/RtmpFXuMyp/file193766d6e567/01_getting_started.Rmd.
-#> ✔ Copied tutorial 2 to /tmp/RtmpFXuMyp/file193766d6e567/02_data_wrangling.Rmd.
-#> ✔ Copied tutorial 3 to /tmp/RtmpFXuMyp/file193766d6e567/03_descriptive_statistics.Rmd.
-#> ✔ Copied tutorial 5 to /tmp/RtmpFXuMyp/file193766d6e567/05_transformations.Rmd.
-#> ✔ Copied tutorial 6 to /tmp/RtmpFXuMyp/file193766d6e567/06_multiple_regression.Rmd.
-#> ✔ Copied tutorial 7 to /tmp/RtmpFXuMyp/file193766d6e567/07_categorical_predictors.Rmd.
-#> ✔ Copied tutorial 8 to /tmp/RtmpFXuMyp/file193766d6e567/08_interactions.Rmd.
-#> ✔ Copied tutorial 9 to /tmp/RtmpFXuMyp/file193766d6e567/09_significance_testing.Rmd.
-#> ✔ Copied tutorial 10 to /tmp/RtmpFXuMyp/file193766d6e567/10_mixed_models_1.Rmd.
-#> ✔ Copied tutorial 11 to /tmp/RtmpFXuMyp/file193766d6e567/11_mixed_models_2.Rmd.
-#> ✔ Copied tutorial 12 to /tmp/RtmpFXuMyp/file193766d6e567/12_logistic_regression.Rmd.
+#> ℹ Kept /tmp/Rtmp9CGCbg/file18794da2a507/04_linear_models.Rmd, which is already there.
+#> ✔ Copied tutorial 1 to /tmp/Rtmp9CGCbg/file18794da2a507/01_getting_started.Rmd.
+#> ✔ Copied tutorial 2 to /tmp/Rtmp9CGCbg/file18794da2a507/02_data_wrangling.Rmd.
+#> ✔ Copied tutorial 3 to /tmp/Rtmp9CGCbg/file18794da2a507/03_descriptive_statistics.Rmd.
+#> ✔ Copied tutorial 5 to /tmp/Rtmp9CGCbg/file18794da2a507/05_transformations.Rmd.
+#> ✔ Copied tutorial 6 to /tmp/Rtmp9CGCbg/file18794da2a507/06_multiple_regression.Rmd.
+#> ✔ Copied tutorial 7 to /tmp/Rtmp9CGCbg/file18794da2a507/07_categorical_predictors.Rmd.
+#> ✔ Copied tutorial 8 to /tmp/Rtmp9CGCbg/file18794da2a507/08_interactions.Rmd.
+#> ✔ Copied tutorial 9 to /tmp/Rtmp9CGCbg/file18794da2a507/09_significance_testing.Rmd.
+#> ✔ Copied tutorial 10 to /tmp/Rtmp9CGCbg/file18794da2a507/10_mixed_models_1.Rmd.
+#> ✔ Copied tutorial 11 to /tmp/Rtmp9CGCbg/file18794da2a507/11_mixed_models_2.Rmd.
+#> ✔ Copied tutorial 12 to /tmp/Rtmp9CGCbg/file18794da2a507/12_logistic_regression.Rmd.
 list.files(dir)
 #>  [1] "01_getting_started.Rmd"        "02_data_wrangling.Rmd"        
 #>  [3] "03_descriptive_statistics.Rmd" "04_linear_models.Rmd"         
