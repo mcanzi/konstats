@@ -36,8 +36,8 @@ The paths of the sheets in \code{dir}, invisibly.
 }
 \description{
 Copies the exercise sheet of a tutorial into a folder, where you can open
-it and write your answers in the empty chunks. The weekly assignment is at
-the end of the sheet; you hand in the .Rmd file.
+it and write your answers in the empty chunks. If the sheet has a weekly
+assignment, it comes at the end, and you hand in the .Rmd file.
 }
 \examples{
 dir <- tempfile()

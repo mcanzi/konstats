@@ -11,7 +11,7 @@
   opens the slides of a lecture.
 * `tutorials()` lists the exercise sheets and `get_tutorial()` copies them into
   a project folder, one at a time or all at once with `get_tutorial("all", dir)`.
-  Sheets for Statistics tutorials 2 to 4.
+  Sheets for Statistics tutorials 2 to 12.
 * An R Markdown template for the weekly assignments.
 * The helpers of the Advanced Statistics slides: `resid_acf()` (residual
   autocorrelation within trajectories), `partial_dependence()` (called

@@ -2,7 +2,8 @@
 #'
 #' Lists the exercise sheets that come with konstats. Each sheet is an R
 #' Markdown file with the exercises of one tutorial and an empty code chunk
-#' for each answer; the last exercises are the weekly assignment. Copy one
+#' for each answer. Some sheets end with a weekly assignment, which you
+#' complete at home. Copy one
 #' into your project folder with [get_tutorial()], or all of them with
 #' `get_tutorial("all", dir)`.
 #'
@@ -28,8 +29,8 @@ tutorials <- function(course = NULL) {
 #' Copy exercise sheets into your project
 #'
 #' Copies the exercise sheet of a tutorial into a folder, where you can open
-#' it and write your answers in the empty chunks. The weekly assignment is at
-#' the end of the sheet; you hand in the .Rmd file.
+#' it and write your answers in the empty chunks. If the sheet has a weekly
+#' assignment, it comes at the end, and you hand in the .Rmd file.
 #'
 #' @param number Number of the tutorial, the same as its lecture, such as
 #'   `4`. Several numbers, such as `2:4`, or `"all"` copy several sheets at

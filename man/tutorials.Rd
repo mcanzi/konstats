@@ -17,7 +17,8 @@ A tibble with one row per sheet and the columns \code{course},
 \description{
 Lists the exercise sheets that come with konstats. Each sheet is an R
 Markdown file with the exercises of one tutorial and an empty code chunk
-for each answer; the last exercises are the weekly assignment. Copy one
+for each answer. Some sheets end with a weekly assignment, which you
+complete at home. Copy one
 into your project folder with \code{\link[=get_tutorial]{get_tutorial()}}, or all of them with
 \code{get_tutorial("all", dir)}.
 }
