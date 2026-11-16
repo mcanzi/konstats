@@ -58,11 +58,6 @@ test_that("get_tutorial() copies several sheets or all of them, keeping answers"
   expect_false(identical(readLines(file.path(dir, "04_linear_models.Rmd")), "my answers"))
 })
 
-test_that("get_tutorial() says when a course has no sheets", {
-  skip_if(nrow(tutorials("advanced")) > 0)
-  expect_error(get_tutorial("all", new_tempdir(), course = "advanced", open = FALSE), "no exercise sheets yet")
-})
-
 test_that("the assignment template exists", {
   template <- system.file("rmarkdown", "templates", "assignment", package = "konstats")
   expect_true(file.exists(file.path(template, "template.yaml")))

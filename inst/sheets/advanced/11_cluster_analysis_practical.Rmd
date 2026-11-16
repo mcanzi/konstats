@@ -16,6 +16,7 @@ These exercises follow the tasks on the slides of lecture 11, "Cluster analysis 
 ## Setup
 
 ```{r}
+library(mclust)
 library(tidyverse)
 library(psych)
 library(cluster)
@@ -131,7 +132,7 @@ Compute the mean score of each k-means cluster on each dimension, and plot these
 
 ### 4.1 Two halves
 
-Split the texts at random into two halves, and fit k-means with three clusters to each half. Assign all 480 texts to the nearest centre of each solution with `nearest()`, and cross-tabulate the two assignments.
+Split the texts at random into two halves, and fit k-means with three clusters to each half. Assign all 480 texts to the nearest centre of each solution with `nearest()`, cross-tabulate the two assignments, and compute their adjusted Rand index with `mclust::adjustedRandIndex()`.
 
 ```{r}
 set.seed(3)
@@ -145,7 +146,7 @@ nearest <- function(X, centres) apply(X, 1, \(x) which.min(colSums((t(centres) -
 
 ### 4.2 Three or six?
 
-Repeat exercise 4.1 with six clusters. For each cluster of the first half, what share of its texts does the second half put together in one cluster? Which solution is more stable?
+Repeat exercise 4.1 with six clusters, and compare the adjusted Rand index of the two solutions. Which one is more stable?
 
 ```{r}
 
@@ -182,6 +183,14 @@ Fit `pam()` from `{cluster}` with three clusters on `S`, and compare it with the
 ### 5.4 Standardised features
 
 Cluster the standardised features (`scale(features)`) into three clusters, and cross-tabulate the result with the clusters on the dimension scores. How similar are they?
+
+```{r}
+
+```
+
+### 5.5 A mixture model
+
+Fit a Gaussian mixture to the dimension scores with `mclust::Mclust(S, G = 1:8, verbose = FALSE)`, as in lecture 10. How many components does BIC choose? Compare the components with the registers and with your k-means clusters, with cross-tables and the adjusted Rand index.
 
 ```{r}
 

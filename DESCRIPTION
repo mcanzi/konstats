@@ -49,6 +49,7 @@ Suggests:
     ggridges,
     itsadug,
     lavaan,
+    mclust,
     mgcv,
     patchwork,
     psych,
