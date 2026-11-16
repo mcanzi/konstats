@@ -62,9 +62,9 @@ install_course <- function(course = "advanced", update = FALSE) {
 #' Check that your computer is ready for a course
 #'
 #' Reports your version of R and checks that every package the course uses
-#' is installed. For Advanced Statistics it also checks that simling is
-#' recent enough to have all the data sets of the course. Run it before the
-#' first session, and again whenever course code fails on your computer.
+#' is installed. It also checks that your version of simling has every
+#' data set the slides of the course use. Run it before the first session,
+#' and again whenever course code fails on your computer.
 #'
 #' @param course Which course: `"statistics"` or `"advanced"`.
 #'
@@ -93,9 +93,13 @@ check_setup <- function(course = "statistics") {
     cli::cli_alert_info("Run {.run konstats::install_course(\"{course}\")} to install them.")
   }
 
-  if (course == "advanced" && is_installed("simling") && !has_dataset("simling", "web_registers")) {
-    cli::cli_alert_danger("simling is too old for the course: it has no {.code web_registers}.")
-    cli::cli_alert_info("Run {.run remotes::install_github(\"mcanzi/simling\")} to update it.")
+  if (is_installed("simling")) {
+    needed <- course_datasets(course)
+    absent <- needed[!has_dataset("simling", needed)]
+    if (length(absent) > 0) {
+      cli::cli_alert_danger("simling is too old for the course: it has no {.code {absent}}.")
+      cli::cli_alert_info("Run {.run remotes::install_github(\"mcanzi/simling\")} to update it.")
+    }
   }
 
   invisible(report)
@@ -144,6 +148,13 @@ package_version_or_na <- function(package) {
     return(NA_character_)
   }
   as.character(utils::packageVersion(package))
+}
+
+# the simling data sets used in the slides of a course (penguins is from palmerpenguins)
+course_datasets <- function(course) {
+  datasets <- lectures(course)$datasets
+  datasets <- trimws(unlist(strsplit(datasets[!is.na(datasets)], ",")))
+  setdiff(unique(datasets), "penguins")
 }
 
 has_dataset <- function(package, dataset) {

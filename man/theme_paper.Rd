@@ -16,8 +16,8 @@ A ggplot2 theme.
 }
 \description{
 A plain theme for figures in papers and theses: white background, light
-grid without minor lines, bold facet labels on the left, title aligned
-with the plot and the legend at the bottom. Built in Advanced Statistics,
+grid without minor lines, bold left-aligned facet labels, a title that
+starts at the left edge of the figure and the legend at the bottom. Built in Advanced Statistics,
 session 11. \code{ggplot2::theme_set(theme_paper())} makes it the default.
 }
 \examples{

@@ -90,3 +90,23 @@ test_that("theme_paper() is a complete ggplot2 theme", {
   expect_identical(th$legend.position, "bottom")
   expect_identical(th$text$size, 14)
 })
+
+test_that("resid_acf() is NA at lags as long as the groups", {
+  acf <- resid_acf(c(1, 3, 2, 5, 4, 6), rep(1:2, each = 3), max_lag = 4)
+  expect_identical(nrow(acf), 5L)
+  expect_true(all(is.na(acf$acf[acf$lag >= 2])))
+})
+
+test_that("partial_dependence() passes arguments to predict()", {
+  d <- simling::td_deletion
+  m <- glm(deleted ~ age, data = d, family = binomial)
+  pd <- partial_dependence(m, d, "age", c(20, 80), type = "response")
+  expect_true(all(pd$prediction > 0 & pd$prediction < 1))
+  expect_error(partial_dependence(m, d, c("age", "rate"), 20), "one column")
+})
+
+test_that("cv_speakers() asks for a whole number of folds", {
+  skip_if_not_installed("ranger")
+  expect_error(cv_speakers(l1 ~ vot, simling::accent, k = 2.5), "between 2")
+  expect_error(cv_speakers(l1 ~ vot, simling::accent, k = 1), "between 2")
+})

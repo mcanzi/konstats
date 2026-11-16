@@ -28,6 +28,7 @@ test_that("slides() finds a lecture by its topic", {
   expect_error(slides(20, open = FALSE), "no lecture 20")
   expect_error(slides(10, course = "advanced", open = FALSE), "not online yet")
   expect_error(slides(c(1, 2), open = FALSE), "one lecture")
+  expect_error(slides(" ", open = FALSE), "one lecture")
   # a topic is matched as text, not as a regular expression
   expect_error(slides("models (", open = FALSE), "No lecture")
 })

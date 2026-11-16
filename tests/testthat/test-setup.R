@@ -23,6 +23,15 @@ test_that("check_setup() returns one row per package", {
   expect_true(all(report$installed))
 })
 
+test_that("simling has every data set the slides use", {
+  for (course in c("statistics", "advanced")) {
+    needed <- konstats:::course_datasets(course)
+    expect_gt(length(needed), 0)
+    expect_true(all(konstats:::has_dataset("simling", needed)), label = course)
+  }
+  expect_false("penguins" %in% konstats:::course_datasets("statistics"))
+})
+
 test_that("a course must be statistics or advanced", {
   expect_error(course_packages("maths"), "statistics")
   expect_error(check_setup(c("statistics", "advanced")), "statistics")

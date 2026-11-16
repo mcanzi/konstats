@@ -34,8 +34,29 @@ test_that("get_tutorial() explains what is missing", {
   dir <- new_tempdir()
   expect_error(get_tutorial(99, dir, open = FALSE), "no exercise sheet for tutorial 99")
   expect_error(get_tutorial(4, file.path(dir, "nope"), open = FALSE), "does not exist")
-  expect_error(get_tutorial(c(2, 3), dir, open = FALSE), "one tutorial")
-  expect_error(get_tutorial("4", dir, open = FALSE), "one tutorial")
+  expect_error(get_tutorial(c(2, 99, 98), dir, open = FALSE), "tutorials 99 and 98")
+  expect_error(get_tutorial("4", dir, open = FALSE), "number of a tutorial")
+  expect_error(get_tutorial(NA_real_, dir, open = FALSE), "number of a tutorial")
+  expect_error(get_tutorial(numeric(), dir, open = FALSE), "number of a tutorial")
+})
+
+test_that("get_tutorial() copies several sheets or all of them, keeping answers", {
+  dir <- new_tempdir()
+  paths <- suppressMessages(get_tutorial(c(2, 4, 4), dir, open = FALSE))
+  expect_identical(basename(paths), c("02_data_wrangling.Rmd", "04_linear_models.Rmd"))
+  writeLines("my answers", paths[2])
+  messages <- capture_messages(paths <- get_tutorial("all", dir, open = FALSE))
+  expect_match(messages, "Kept", all = FALSE)
+  expect_setequal(basename(paths), tutorials("statistics")$file)
+  expect_setequal(list.files(dir), tutorials("statistics")$file)
+  expect_identical(readLines(file.path(dir, "04_linear_models.Rmd")), "my answers")
+  suppressMessages(get_tutorial("all", dir, overwrite = TRUE, open = FALSE))
+  expect_false(identical(readLines(file.path(dir, "04_linear_models.Rmd")), "my answers"))
+})
+
+test_that("get_tutorial() says when a course has no sheets", {
+  skip_if(nrow(tutorials("advanced")) > 0)
+  expect_error(get_tutorial("all", new_tempdir(), course = "advanced", open = FALSE), "no exercise sheets yet")
 })
 
 test_that("the assignment template exists", {

@@ -3,7 +3,8 @@
 #' Lists the exercise sheets that come with konstats. Each sheet is an R
 #' Markdown file with the exercises of one tutorial and an empty code chunk
 #' for each answer; the last exercises are the weekly assignment. Copy one
-#' into your project folder with [get_tutorial()].
+#' into your project folder with [get_tutorial()], or all of them with
+#' `get_tutorial("all", dir)`.
 #'
 #' @param course Which course: `"statistics"` or `"advanced"`. `NULL`, the
 #'   default, lists both.
@@ -24,61 +25,78 @@ tutorials <- function(course = NULL) {
   )
 }
 
-#' Copy an exercise sheet into your project
+#' Copy exercise sheets into your project
 #'
 #' Copies the exercise sheet of a tutorial into a folder, where you can open
 #' it and write your answers in the empty chunks. The weekly assignment is at
 #' the end of the sheet; you hand in the .Rmd file.
 #'
-#' @param number Number of the tutorial, the same as its lecture. See
-#'   [tutorials()] for the sheets available.
-#' @param dir Folder to copy the sheet into, such as `"."` for the current
+#' @param number Number of the tutorial, the same as its lecture, such as
+#'   `4`. Several numbers, such as `2:4`, or `"all"` copy several sheets at
+#'   once. See [tutorials()] for the sheets available.
+#' @param dir Folder to copy the sheets into, such as `"."` for the current
 #'   folder of your R project.
 #' @param course Which course: `"statistics"` or `"advanced"`.
-#' @param overwrite If `TRUE`, replace a sheet of the same name that is
-#'   already in `dir`, answers and all. By default the copy stops instead.
+#' @param overwrite If `TRUE`, replace sheets of the same name that are
+#'   already in `dir`, answers and all. By default a sheet that is already
+#'   there is kept: with one number the copy stops with an error, with
+#'   several numbers or `"all"` that sheet is skipped and the others are
+#'   copied.
 #' @param open If `TRUE`, the default in an interactive session, open the
-#'   sheet after copying it.
+#'   sheet after copying it. Only used when you copy one sheet.
 #'
-#' @return The path of the copied sheet, invisibly.
+#' @return The paths of the sheets in `dir`, invisibly.
 #' @export
 #' @examples
 #' dir <- tempfile()
 #' dir.create(dir)
 #' get_tutorial(4, dir, open = FALSE)
+#' get_tutorial("all", dir)
 #' list.files(dir)
 get_tutorial <- function(number, dir, course = "statistics", overwrite = FALSE, open = interactive()) {
   course <- match_course(course)
-  if (length(number) != 1 || !is.numeric(number) || is.na(number)) {
-    cli::cli_abort("{.arg number} must be the number of one tutorial, such as {.code 4}.")
-  }
   sheets <- tutorials(course)
-  if (!number %in% sheets$number) {
+  all <- identical(number, "all")
+  if (!all && (length(number) == 0 || !is.numeric(number) || anyNA(number))) {
+    cli::cli_abort("{.arg number} must be the number of a tutorial, such as {.code 4}, several numbers, or {.code \"all\"}.")
+  }
+  if (nrow(sheets) == 0) {
+    cli::cli_abort("{course_name(course)} has no exercise sheets yet.")
+  }
+  number <- if (all) sheets$number else unique(number)
+  missing <- setdiff(number, sheets$number)
+  if (length(missing) > 0) {
     cli::cli_abort(c(
-      "{course_name(course)} has no exercise sheet for tutorial {number}.",
-      i = if (nrow(sheets) > 0) "Sheets are available for tutorials {.val {sheets$number}}." else "No sheets are available yet."
+      "{course_name(course)} has no exercise sheet for {cli::qty(length(missing))}tutorial{?s} {missing}.",
+      i = "Sheets are available for tutorials {.val {sheets$number}}."
     ))
   }
   if (!dir.exists(dir)) {
     cli::cli_abort("The folder {.path {dir}} does not exist.")
   }
-  file <- sheets$file[sheets$number == number]
-  target <- file.path(dir, file)
-  if (file.exists(target) && !overwrite) {
+  files <- sheets$file[match(number, sheets$number)]
+  targets <- file.path(dir, files)
+  kept <- file.exists(targets) & !overwrite
+  if (length(number) == 1 && kept) {
     cli::cli_abort(c(
-      "{.path {target}} already exists.",
+      "{.path {targets}} already exists.",
       i = "Use {.code overwrite = TRUE} to replace it, and lose the answers in it."
     ))
   }
-  copied <- file.copy(system.file("sheets", course, file, package = "konstats"), target, overwrite = TRUE)
-  if (!copied) {
-    cli::cli_abort("Could not write {.path {target}}. Check that you can save files in {.path {dir}}.")
+  for (i in which(kept)) {
+    cli::cli_alert_info("Kept {.path {targets[i]}}, which is already there.")
   }
-  cli::cli_alert_success("Copied tutorial {number} to {.path {target}}.")
-  if (open) {
-    utils::file.edit(target)
+  for (i in which(!kept)) {
+    copied <- file.copy(system.file("sheets", course, files[i], package = "konstats"), targets[i], overwrite = TRUE)
+    if (!copied) {
+      cli::cli_abort("Could not write {.path {targets[i]}}. Check that you can save files in {.path {dir}}.")
+    }
+    cli::cli_alert_success("Copied tutorial {number[i]} to {.path {targets[i]}}.")
   }
-  invisible(target)
+  if (open && length(number) == 1) {
+    utils::file.edit(targets)
+  }
+  invisible(targets)
 }
 
 tutorial_files <- function(course) {

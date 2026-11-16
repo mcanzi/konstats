@@ -2,7 +2,7 @@
 % Please edit documentation in R/tutorials.R
 \name{get_tutorial}
 \alias{get_tutorial}
-\title{Copy an exercise sheet into your project}
+\title{Copy exercise sheets into your project}
 \usage{
 get_tutorial(
   number,
@@ -13,22 +13,26 @@ get_tutorial(
 )
 }
 \arguments{
-\item{number}{Number of the tutorial, the same as its lecture. See
-\code{\link[=tutorials]{tutorials()}} for the sheets available.}
+\item{number}{Number of the tutorial, the same as its lecture, such as
+\code{4}. Several numbers, such as \code{2:4}, or \code{"all"} copy several sheets at
+once. See \code{\link[=tutorials]{tutorials()}} for the sheets available.}
 
-\item{dir}{Folder to copy the sheet into, such as \code{"."} for the current
+\item{dir}{Folder to copy the sheets into, such as \code{"."} for the current
 folder of your R project.}
 
 \item{course}{Which course: \code{"statistics"} or \code{"advanced"}.}
 
-\item{overwrite}{If \code{TRUE}, replace a sheet of the same name that is
-already in \code{dir}, answers and all. By default the copy stops instead.}
+\item{overwrite}{If \code{TRUE}, replace sheets of the same name that are
+already in \code{dir}, answers and all. By default a sheet that is already
+there is kept: with one number the copy stops with an error, with
+several numbers or \code{"all"} that sheet is skipped and the others are
+copied.}
 
 \item{open}{If \code{TRUE}, the default in an interactive session, open the
-sheet after copying it.}
+sheet after copying it. Only used when you copy one sheet.}
 }
 \value{
-The path of the copied sheet, invisibly.
+The paths of the sheets in \code{dir}, invisibly.
 }
 \description{
 Copies the exercise sheet of a tutorial into a folder, where you can open
@@ -39,5 +43,6 @@ the end of the sheet; you hand in the .Rmd file.
 dir <- tempfile()
 dir.create(dir)
 get_tutorial(4, dir, open = FALSE)
+get_tutorial("all", dir)
 list.files(dir)
 }

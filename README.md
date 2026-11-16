@@ -39,12 +39,15 @@ slides("random forests", course = "advanced")
 
 ### Exercise sheets
 
-Each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer. The last exercises are the weekly assignment. `get_tutorial()` copies a sheet into your project folder:
+Each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer. The last exercises are the weekly assignment. `get_tutorial()` copies a sheet into your project folder, or all of them at once:
 
 ```r
 tutorials()
 get_tutorial(4, ".")
+get_tutorial("all", ".")
 ```
+
+You write your answers in the copy, and a sheet that is already in the folder is never overwritten unless you ask.
 
 ### Weekly assignments
 

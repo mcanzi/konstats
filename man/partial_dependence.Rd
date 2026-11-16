@@ -4,7 +4,7 @@
 \alias{partial_dependence}
 \title{Partial dependence of a model on one predictor}
 \usage{
-partial_dependence(model, data, var, values, class = NULL)
+partial_dependence(model, data, var, values, class = NULL, ...)
 }
 \arguments{
 \item{model}{A fitted model. For a classification forest from ranger,
@@ -20,6 +20,10 @@ fitted to.}
 
 \item{class}{For models that predict a probability for each class: the
 class whose probability to average, such as \code{"deleted"}.}
+
+\item{...}{Passed on to \code{predict()}. For a logistic regression from
+\code{glm()}, use \code{type = "response"} to average probabilities instead of
+log-odds.}
 }
 \value{
 A tibble with one row per value and the columns \code{value} and
@@ -43,6 +47,10 @@ if (requireNamespace("ranger", quietly = TRUE)) {
                        num.trees = 200, probability = TRUE, seed = 1)
   partial_dependence(rf, td_deletion, "age", seq(20, 80, by = 10), class = "deleted")
 }
+
+# a logistic regression: average the probabilities, not the log-odds
+m <- glm(deleted ~ age + rate, data = td_deletion, family = binomial)
+partial_dependence(m, td_deletion, "age", c(20, 50, 80), type = "response")
 }
 \references{
 Friedman, J. H. (2001). Greedy function approximation: A

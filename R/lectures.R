@@ -76,7 +76,7 @@ slides <- function(lecture, course = "statistics", open = interactive()) {
 }
 
 find_lecture <- function(lecs, lecture, course) {
-  if (length(lecture) != 1 || is.na(lecture) || !(is.numeric(lecture) || is.character(lecture))) {
+  if (length(lecture) != 1 || is.na(lecture) || !(is.numeric(lecture) || is.character(lecture)) || !nzchar(trimws(lecture))) {
     cli::cli_abort("{.arg lecture} must be one lecture number or one topic, such as {.code 4} or {.val mixed}.")
   }
   if (is.numeric(lecture)) {

@@ -16,7 +16,8 @@ resid_acf(res, group, max_lag = 8)
 }
 \value{
 A tibble with one row per lag and the columns \code{lag} and \code{acf}.
-The autocorrelation at lag 0 is always 1.
+The autocorrelation at lag 0 is always 1. It is \code{NA} at lags as long as
+the groups, where there are too few pairs of residuals left.
 }
 \description{
 Computes the autocorrelation of model residuals within each trajectory,

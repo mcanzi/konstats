@@ -18,7 +18,8 @@
 #' @param max_lag The largest lag, in measurements.
 #'
 #' @return A tibble with one row per lag and the columns `lag` and `acf`.
-#'   The autocorrelation at lag 0 is always 1.
+#'   The autocorrelation at lag 0 is always 1. It is `NA` at lags as long as
+#'   the groups, where there are too few pairs of residuals left.
 #' @export
 #' @examples
 #' library(simling)
@@ -40,7 +41,7 @@ resid_acf <- function(res, group, max_lag = 8) {
   purrr::map(0:max_lag, \(l) {
     d |>
       dplyr::mutate(res_lag = dplyr::lag(.data$res, l), .by = "group") |>
-      dplyr::summarise(acf = stats::cor(.data$res, .data$res_lag, use = "complete.obs")) |>
+      dplyr::summarise(acf = lag_cor(.data$res, .data$res_lag)) |>
       dplyr::mutate(lag = l)
   }) |>
     purrr::list_rbind() |>
@@ -65,6 +66,9 @@ resid_acf <- function(res, group, max_lag = 8) {
 #'   `seq(18, 80, by = 2)`. For a factor, levels of the factor.
 #' @param class For models that predict a probability for each class: the
 #'   class whose probability to average, such as `"deleted"`.
+#' @param ... Passed on to `predict()`. For a logistic regression from
+#'   `glm()`, use `type = "response"` to average probabilities instead of
+#'   log-odds.
 #'
 #' @return A tibble with one row per value and the columns `value` and
 #'   `prediction`, the mean prediction (or probability of `class`).
@@ -81,7 +85,14 @@ resid_acf <- function(res, group, max_lag = 8) {
 #'                        num.trees = 200, probability = TRUE, seed = 1)
 #'   partial_dependence(rf, td_deletion, "age", seq(20, 80, by = 10), class = "deleted")
 #' }
-partial_dependence <- function(model, data, var, values, class = NULL) {
+#'
+#' # a logistic regression: average the probabilities, not the log-odds
+#' m <- glm(deleted ~ age + rate, data = td_deletion, family = binomial)
+#' partial_dependence(m, td_deletion, "age", c(20, 50, 80), type = "response")
+partial_dependence <- function(model, data, var, values, class = NULL, ...) {
+  if (!is.character(var) || length(var) != 1) {
+    cli::cli_abort("{.arg var} must be the name of one column, such as {.val age}.")
+  }
   if (!var %in% names(data)) {
     cli::cli_abort("{.arg data} has no column {.val {var}}.")
   }
@@ -91,7 +102,7 @@ partial_dependence <- function(model, data, var, values, class = NULL) {
       column <- factor(column, levels = levels(data[[var]]))
     }
     data[[var]] <- column
-    pred <- stats::predict(model, data)
+    pred <- stats::predict(model, data, ...)
     if (is.list(pred) && !is.null(pred$predictions)) {
       pred <- pred$predictions
     }
@@ -157,7 +168,7 @@ cv_speakers <- function(formula, data, speaker = "speaker", k = 5, seed = 2, num
   stratify <- (is.factor(data[[response]]) || is.character(data[[response]])) && !anyDuplicated(speakers[[speaker]])
   # each fold needs at least one speaker (of each group, when stratified)
   smallest <- if (stratify) min(table(speakers[[response]])) else length(unique(data[[speaker]]))
-  if (k < 2 || k > smallest) {
+  if (length(k) != 1 || !is.numeric(k) || is.na(k) || k != round(k) || k < 2 || k > smallest) {
     cli::cli_abort("{.arg k} must be between 2 and {smallest}, the number of speakers{if (stratify) ' in the smallest group' else ''}.")
   }
   # everything random runs under the seed, in the order of the slides: the
@@ -189,8 +200,8 @@ cv_speakers <- function(formula, data, speaker = "speaker", k = 5, seed = 2, num
 #' A ggplot2 theme for papers
 #'
 #' A plain theme for figures in papers and theses: white background, light
-#' grid without minor lines, bold facet labels on the left, title aligned
-#' with the plot and the legend at the bottom. Built in Advanced Statistics,
+#' grid without minor lines, bold left-aligned facet labels, a title that
+#' starts at the left edge of the figure and the legend at the bottom. Built in Advanced Statistics,
 #' session 11. `ggplot2::theme_set(theme_paper())` makes it the default.
 #'
 #' @param base_size Base font size, in points.
@@ -216,6 +227,15 @@ theme_paper <- function(base_size = 11, base_family = "") {
       plot.title.position = "plot",
       legend.position = "bottom"
     )
+}
+
+# correlation of the complete pairs, NA when there are fewer than three
+lag_cor <- function(x, y) {
+  ok <- !is.na(x) & !is.na(y)
+  if (sum(ok) < 3) {
+    return(NA_real_)
+  }
+  stats::cor(x[ok], y[ok])
 }
 
 with_seed <- function(seed, code) {
