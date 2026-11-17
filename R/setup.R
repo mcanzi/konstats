@@ -98,7 +98,7 @@ check_setup <- function(course = "statistics") {
     absent <- needed[!has_dataset("simling", needed)]
     if (length(absent) > 0) {
       cli::cli_alert_danger("simling is too old for the course: it has no {.code {absent}}.")
-      cli::cli_alert_info("Run {.run remotes::install_github(\"mcanzi/simling\")} to update it.")
+      cli::cli_alert_info("Run {.run install.packages(\"simling\", repos = c(\"https://mcanzi.r-universe.dev\", \"https://cloud.r-project.org\"))} to update it.")
     }
   }
 
