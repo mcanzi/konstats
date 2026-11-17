@@ -52,10 +52,12 @@ slides("random forests", course = "advanced")
 
 ### Exercise sheets
 
-Each tutorial has an exercise sheet: an R Markdown file with the
-exercises and an empty code chunk for each answer. Some sheets end with
-a weekly assignment, which you complete at home. In Advanced Statistics,
-the practical lectures 4, 6, 9 and 11 have a sheet each.
+Each tutorial has an exercise sheet with the exercises and an empty code
+chunk for each answer. Some sheets end with a weekly assignment, which
+you complete at home. In Advanced Statistics, the practical lectures 4,
+6, 9 and 11 have a sheet each. The Statistics sheets are R Markdown
+files (`.Rmd`), the Advanced Statistics sheets Quarto documents
+(`.qmd`); RStudio opens and renders both.
 [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
 copies a sheet into your project folder, or all of them at once:
 

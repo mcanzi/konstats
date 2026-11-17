@@ -1,10 +1,12 @@
 # The weekly exercise sheets
 
-Lists the exercise sheets that come with konstats. Each sheet is an R
-Markdown file with the exercises of one tutorial and an empty code chunk
-for each answer. Some sheets end with a weekly assignment, which you
-complete at home. Tutorial 1 of Statistics is a guided tutorial, and its
-sheet has all the code. Copy one into your project folder with
+Lists the exercise sheets that come with konstats. Each sheet has the
+exercises of one tutorial and an empty code chunk for each answer: an R
+Markdown file (`.Rmd`) in Statistics, a Quarto document (`.qmd`) in
+Advanced Statistics. RStudio opens and renders both. Some sheets end
+with a weekly assignment, which you complete at home. Tutorial 1 of
+Statistics is a guided tutorial, and its sheet has all the code. Copy
+one into your project folder with
 [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md),
 or all of them with `get_tutorial("all", dir)`.
 
@@ -45,8 +47,8 @@ tutorials()
 #> 10 statistics     10 Mixed models 1               10_mixed_models_1.Rmd         
 #> 11 statistics     11 Mixed models 2               11_mixed_models_2.Rmd         
 #> 12 statistics     12 Mixed logistic regression    12_logistic_regression.Rmd    
-#> 13 advanced        4 GAMMs in practice            04_gamm_practical.Rmd         
-#> 14 advanced        6 Random forests in practice   06_random_forests_practical.R…
+#> 13 advanced        4 GAMMs in practice            04_gamm_practical.qmd         
+#> 14 advanced        6 Random forests in practice   06_random_forests_practical.q…
 #> 15 advanced        9 Factor analysis in practice  09_factor_analysis_practical.…
 #> 16 advanced       11 Cluster analysis in practice 11_cluster_analysis_practical…
 ```
