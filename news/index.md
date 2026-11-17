@@ -1,7 +1,9 @@
 # Changelog
 
-## konstats (development version)
+## konstats 0.1.0
 
+- konstats can be installed from R-universe
+  (<https://mcanzi.r-universe.dev>).
 - First version.
 - Installing konstats installs the packages of the Statistics course;
   `install_course("advanced")` installs the extra packages of Advanced

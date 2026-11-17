@@ -10,10 +10,11 @@ use; the data sets of the courses are in
 
 ## Installation
 
+konstats is not on CRAN. Install it from R-universe:
+
 ``` r
 
-# install.packages("remotes")
-remotes::install_github("mcanzi/konstats")
+install.packages("konstats", repos = c("https://mcanzi.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 This also installs every package the Statistics course uses, simling
