@@ -1,6 +1,6 @@
 Package: konstats
 Title: Course Materials for Statistics in Linguistics at the University of Konstanz
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R:
     person("Massimiliano", "Canzi", role = c("aut", "cre", "cph"),
            email = "massimiliano.canzi@uni-konstanz.de",

@@ -2,14 +2,15 @@
 title: "Cluster analysis in practice"
 subtitle: "Tutorial 11"
 author: "Dr Massimiliano Canzi"
-output:
-  html_document:
+format:
+  html:
     theme: darkly
+    embed-resources: true
+execute:
+  echo: true
+  message: false
+  warning: false
 ---
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
 
 These exercises follow the tasks on the slides of lecture 11, "Cluster analysis in practice". Write your code in the empty chunks, and answer the questions in a sentence or two under each chunk. Section 5 goes beyond the slides.
 

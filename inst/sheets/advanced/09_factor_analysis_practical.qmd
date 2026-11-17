@@ -2,14 +2,15 @@
 title: "Factor analysis in practice"
 subtitle: "Tutorial 9"
 author: "Dr Massimiliano Canzi"
-output:
-  html_document:
+format:
+  html:
     theme: darkly
+    embed-resources: true
+execute:
+  echo: true
+  message: false
+  warning: false
 ---
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
 
 These exercises follow the tasks on the slides of lecture 9, "Factor analysis in practice". Write your code in the empty chunks, and answer the questions in a sentence or two under each chunk. Section 4 goes beyond the slides.
 
@@ -67,7 +68,8 @@ Plot the correlation matrix of the 17 features, as in lecture 8.
 
 Run both checks on the 17 features. Read every message and warning R prints: what do they tell you?
 
-```{r, error = TRUE}
+```{r}
+#| error: true
 KMO(features)
 cortest.bartlett(cor(features), n = nrow(features))
 ```
@@ -76,7 +78,8 @@ cortest.bartlett(cor(features), n = nrow(features))
 
 The eigenvector of the smallest eigenvalue shows which features are a linear combination of others. Which features have weights that are not zero? Look at their values in the data, and fix the problem.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 e <- eigen(cor(features))
 min(e$values)
 round(e$vectors[, which.min(e$values)], 2)
@@ -102,7 +105,8 @@ Without `pronouns`, run `KMO()` and Bartlett's test again. Then run a parallel a
 
 Fit a factor analysis with minimum residual extraction and promax rotation, with the number of factors from exercise 2.3:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 mda <- fa(features, nfactors = ___, rotate = "promax", fm = "minres")
 print(mda$loadings, cutoff = 0.3, sort = TRUE)
 round(mda$Phi, 2)

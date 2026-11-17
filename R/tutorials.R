@@ -1,8 +1,9 @@
 #' The weekly exercise sheets
 #'
-#' Lists the exercise sheets that come with konstats. Each sheet is an R
-#' Markdown file with the exercises of one tutorial and an empty code chunk
-#' for each answer. Some sheets end with a weekly assignment, which you
+#' Lists the exercise sheets that come with konstats. Each sheet has the
+#' exercises of one tutorial and an empty code chunk for each answer: an R
+#' Markdown file (`.Rmd`) in Statistics, a Quarto document (`.qmd`) in
+#' Advanced Statistics. RStudio opens and renders both. Some sheets end with a weekly assignment, which you
 #' complete at home. Tutorial 1 of Statistics is a guided tutorial, and its
 #' sheet has all the code. Copy one
 #' into your project folder with [get_tutorial()], or all of them with
@@ -31,7 +32,8 @@ tutorials <- function(course = NULL) {
 #'
 #' Copies the exercise sheet of a tutorial into a folder, where you can open
 #' it and write your answers in the empty chunks. If the sheet has a weekly
-#' assignment, it comes at the end, and you hand in the .Rmd file.
+#' assignment, it comes at the end, and you hand in the sheet itself (the
+#' `.Rmd` file).
 #'
 #' @param number Number of the tutorial, the same as its lecture, such as
 #'   `4`. Several numbers, such as `2:4`, or `"all"` copy several sheets at
@@ -106,7 +108,7 @@ tutorial_files <- function(course) {
   if (!nzchar(folder)) {
     return(character())
   }
-  list.files(folder, pattern = "^[0-9]{2}_.*[.]Rmd$", full.names = TRUE)
+  list.files(folder, pattern = "^[0-9]{2}_.*[.](Rmd|qmd)$", full.names = TRUE)
 }
 
 rmd_title <- function(path) {

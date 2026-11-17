@@ -1,3 +1,9 @@
+# konstats (development version)
+
+* The Advanced Statistics exercise sheets are Quarto documents (`.qmd`), like
+  the slides of the course. `tutorials()` and `get_tutorial()` handle both
+  `.qmd` and `.Rmd` sheets; the Statistics sheets are still R Markdown.
+
 # konstats 0.1.0
 
 * konstats can be installed from R-universe (<https://mcanzi.r-universe.dev>).

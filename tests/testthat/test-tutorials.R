@@ -34,6 +34,16 @@ test_that("get_tutorial() copies a sheet and does not overwrite it", {
   expect_false(identical(readLines(path), "my answers"))
 })
 
+test_that("Advanced Statistics sheets are Quarto documents and get_tutorial() copies them", {
+  sheets <- tutorials("advanced")
+  expect_identical(sheets$number, c(4L, 6L, 9L, 11L))
+  expect_match(sheets$file, "[.]qmd$")
+  dir <- new_tempdir()
+  path <- suppressMessages(get_tutorial(4, dir, course = "advanced", open = FALSE))
+  expect_identical(basename(path), "04_gamm_practical.qmd")
+  expect_true(any(readLines(path) == "format:"))
+})
+
 test_that("get_tutorial() explains what is missing", {
   dir <- new_tempdir()
   expect_error(get_tutorial(99, dir, open = FALSE), "no exercise sheet for tutorial 99")

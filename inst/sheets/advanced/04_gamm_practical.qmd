@@ -2,14 +2,15 @@
 title: "GAMMs in practice"
 subtitle: "Tutorial 4"
 author: "Dr Massimiliano Canzi"
-output:
-  html_document:
+format:
+  html:
     theme: darkly
+    embed-resources: true
+execute:
+  echo: true
+  message: false
+  warning: false
 ---
-
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
 
 These exercises follow the tasks on the slides of lecture 4, "GAMMs in practice". Write your code in the empty chunks, and answer the questions in a sentence or two under each chunk. Section 4 goes beyond the slides.
 
@@ -65,7 +66,8 @@ Before fitting anything, write down what you expect the model to find: in which 
 
 Turn `condition` into an ordered factor with treatment contrasts, as in lecture 2, and fit a GAM with a reference smooth and a difference smooth over time. Complete the formula:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 pdata$condition_o <- as.ordered(pdata$condition)
 contrasts(pdata$condition_o) <- "contr.treatment"
 m_gam <- bam(pupil ~ ___ + s(time, k = 20) + s(time, by = ___, k = 20),
@@ -103,7 +105,8 @@ Compute the autocorrelation of the residuals of `m_gam` within trajectories, and
 
 Every participant heard both conditions, so the comparison is within participants. Add random smooths for every combination of participant and condition. Complete the term:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 pdata$part_cond <- interaction(pdata$participant, pdata$condition)
 m_rs <- bam(pupil ~ condition_o + s(time, k = 20) + s(time, by = condition_o, k = 20) +
               s(time, ___, bs = "fs", m = 1, k = 5),
@@ -120,7 +123,8 @@ Why `part_cond` and not `participant`? How many levels does `part_cond` have, an
 
 Add an AR1 error model. Mark the first bin of every trajectory in `AR.start`:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 rho <- itsadug::start_value_rho(m_rs)
 m_ar <- bam(pupil ~ condition_o + s(time, k = 20) + s(time, by = condition_o, k = 20) +
               s(time, part_cond, bs = "fs", m = 1, k = 5),
