@@ -1,4 +1,4 @@
-# konstats (development version)
+# konstats 0.2.0
 
 * konstats is an open course in statistics for linguists, which is also
   taught at the University of Konstanz.
