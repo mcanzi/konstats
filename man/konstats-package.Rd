@@ -9,10 +9,11 @@
 Materials of two open courses in statistics for linguists, Statistics and
 Advanced Statistics, which are also taught at the Department of
 Linguistics, University of Konstanz. Statistics follows Winter (2019)
-from data wrangling to mixed models. Advanced Statistics covers
-generalised additive mixed models, random forests, power analysis, factor
-analysis and cluster analysis. The data sets of the courses are in the
-simling package.
+from data wrangling to mixed models. Its examples and data sets are new,
+and the course is not endorsed by Winter or Routledge. Advanced Statistics
+covers generalised additive mixed models, random forests, power analysis,
+factor analysis and cluster analysis. The data sets of the courses are in
+the simling package.
 }
 \details{
 Before the first session, \code{\link[=install_course]{install_course()}} installs the packages of a

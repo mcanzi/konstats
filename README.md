@@ -2,7 +2,7 @@
 
 [![R-CMD-check](https://github.com/mcanzi/konstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mcanzi/konstats/actions/workflows/R-CMD-check.yaml)
 
-konstats has the materials of two open courses in statistics for linguists, *Statistics* and *Advanced Statistics*, which I also teach at the Department of Linguistics, University of Konstanz. Statistics follows Winter (2019), *Statistics for Linguists: An Introduction Using R*, from data wrangling to mixed models. Advanced Statistics covers generalised additive mixed models, random forests, power analysis, factor analysis and cluster analysis. The slides are online, the exercise sheets are in the package, and the data sets are in [simling](https://mcanzi.de/simling/).
+konstats has the materials of two open courses in statistics for linguists, *Statistics* and *Advanced Statistics*, which I also teach at the Department of Linguistics, University of Konstanz. Statistics follows Winter (2019), *Statistics for Linguists: An Introduction Using R*, from data wrangling to mixed models. Its examples and data sets are new, and the course is not endorsed by Winter or Routledge. Advanced Statistics covers generalised additive mixed models, random forests, power analysis, factor analysis and cluster analysis. The slides are online, the exercise sheets are in the package, and the data sets are in [simling](https://mcanzi.de/simling/).
 
 ## Installation
 
