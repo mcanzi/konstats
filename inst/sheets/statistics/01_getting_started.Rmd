@@ -43,16 +43,17 @@ Call it `statistics`, for example. When you open the project, R works inside tha
 
 ### 1.3 Installing konstats
 
-`{konstats}` is not on CRAN, but on R-universe. Type this in the `Console`, once:
+`{konstats}` is on R-universe. Type this in the `Console`, once:
 
 ```{r, eval = FALSE}
 install.packages("konstats", repos = c("https://mcanzi.r-universe.dev",
                                        "https://cloud.r-project.org"))
+konstats::install_course("statistics")
 ```
 
 . . .
 
-This also installs every package the course uses, from the `tidyverse` and `swirl` of lecture 1 to `{simling}`. It takes a few minutes the first time.
+The second line installs every package the course uses, from the `tidyverse` and `swirl` of lecture 1 to `{simling}`. It takes a few minutes the first time.
 
 . . .
 
@@ -125,7 +126,7 @@ The data are simulated, so we know the [true values]{.hl} behind them. You can c
 
 . . .
 
-`{konstats}` installed it already. Load it like any other package:
+`install_course()` installed it already. Load it like any other package:
 
 ```{r}
 library(simling)

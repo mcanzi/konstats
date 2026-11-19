@@ -2,21 +2,24 @@
 
 [![R-CMD-check](https://github.com/mcanzi/konstats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mcanzi/konstats/actions/workflows/R-CMD-check.yaml)
 
-konstats is the companion package of my courses *Statistics* and *Advanced Statistics* at the Department of Linguistics, University of Konstanz. It is written for their students and is not meant for general use; the data sets of the courses are in [simling](https://mcanzi.de/simling/), which anyone can use.
+konstats has the materials of two open courses in statistics for linguists, *Statistics* and *Advanced Statistics*, which I also teach at the Department of Linguistics, University of Konstanz. Statistics follows Winter (2019), *Statistics for Linguists: An Introduction Using R*, from data wrangling to mixed models. Advanced Statistics covers generalised additive mixed models, random forests, power analysis, factor analysis and cluster analysis. The slides are online, the exercise sheets are in the package, and the data sets are in [simling](https://mcanzi.de/simling/).
 
 ## Installation
 
-konstats is not on CRAN. Install it from R-universe:
+Install konstats from R-universe:
 
 ```r
 install.packages("konstats", repos = c("https://mcanzi.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
-This also installs every package the Statistics course uses, simling included. For Advanced Statistics, install its extra packages once:
+Then install the packages of the course you take, once:
 
 ```r
+konstats::install_course("statistics")
 konstats::install_course("advanced")
 ```
+
+To install konstats and the packages of both courses at once, add `dependencies = TRUE` to `install.packages()`.
 
 Before the first session, check that your computer is ready:
 

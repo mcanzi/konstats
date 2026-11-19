@@ -18,11 +18,11 @@ A tibble with one row per sheet and the columns \code{course},
 Lists the exercise sheets that come with konstats. Each sheet has the
 exercises of one tutorial and an empty code chunk for each answer: an R
 Markdown file (\code{.Rmd}) in Statistics, a Quarto document (\code{.qmd}) in
-Advanced Statistics. RStudio opens and renders both. Some sheets end with a weekly assignment, which you
-complete at home. Tutorial 1 of Statistics is a guided tutorial, and its
-sheet has all the code. Copy one
-into your project folder with \code{\link[=get_tutorial]{get_tutorial()}}, or all of them with
-\code{get_tutorial("all", dir)}.
+Advanced Statistics. RStudio opens and renders both. Some sheets end with
+a weekly assignment, which you complete at home. Tutorial 1 of Statistics
+is a guided tutorial, and its sheet has all the code. Copy one into your
+project folder with \code{\link[=get_tutorial]{get_tutorial()}}, or all of them with
+\code{get_tutorial("all", dir)}. The sheets are licensed under CC BY 4.0.
 }
 \examples{
 tutorials()

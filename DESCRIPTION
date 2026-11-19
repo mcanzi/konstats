@@ -1,63 +1,67 @@
 Package: konstats
-Title: Course Materials for Statistics in Linguistics at the University of Konstanz
+Title: Open Course in Statistics for Linguists
 Version: 0.1.0.9000
 Authors@R:
     person("Massimiliano", "Canzi", role = c("aut", "cre", "cph"),
            email = "massimiliano.canzi@uni-konstanz.de",
            comment = c(ORCID = "0000-0001-6124-0321"))
-Description: Companion package for the Statistics and Advanced Statistics
-    courses taught by Massimiliano Canzi at the Department of Linguistics,
-    University of Konstanz, written for their students and not meant for
-    general use. Installing it brings in the packages of the Statistics
-    course; install_course() adds those of Advanced Statistics, and
-    check_setup() tests a computer for either course. lectures() lists the
-    lectures with their data sets and slides, get_tutorial() copies the
-    weekly exercise sheets into a project folder, and an R Markdown template
-    starts the weekly assignments. The helper functions written in the
-    Advanced Statistics slides are included: residual autocorrelation within
-    trajectories, partial dependence, cross-validation by speaker and a
+Description: Materials of two open courses in statistics for linguists,
+    Statistics and Advanced Statistics, which are also taught at the
+    Department of Linguistics, University of Konstanz. Statistics follows
+    Winter (2019) <doi:10.4324/9781315165547> from data wrangling to mixed
+    models. Advanced Statistics covers generalised additive mixed models,
+    random forests, power analysis, factor analysis and cluster analysis.
+    lectures() lists the lectures with their data sets and slides,
+    get_tutorial() copies the exercise sheets into a project folder, and an
+    'R Markdown' template starts the weekly assignments. install_course()
+    installs the packages a course uses and check_setup() tests a computer
+    for either course. The helper functions written in the slides of
+    Advanced Statistics are included: residual autocorrelation within
+    trajectories, partial dependence as in Friedman (2001)
+    <doi:10.1214/aos/1013203451>, cross-validation by speaker and a
     'ggplot2' theme for papers. The data sets of the courses are in the
     'simling' package.
 License: MIT + file LICENSE
+Copyright: See the file inst/COPYRIGHTS.
 URL: https://github.com/mcanzi/konstats, https://mcanzi.de/konstats/
 BugReports: https://github.com/mcanzi/konstats/issues
 Depends: R (>= 4.1.0)
 Imports:
-    broom,
     cli,
     dplyr,
-    effsize,
     ggplot2,
-    janitor,
-    lme4,
-    lmerTest,
-    palmerpenguins,
     purrr,
     rlang,
-    simling,
-    simr,
     stats,
-    swirl,
     tibble,
-    tidyverse,
     utils
 Suggests:
+    broom,
     cluster,
+    effsize,
     GPArotation,
     ggeffects,
     ggrepel,
     ggridges,
     itsadug,
+    janitor,
     lavaan,
+    lme4,
+    lmerTest,
     mclust,
     mgcv,
+    palmerpenguins,
     patchwork,
     psych,
     ranger,
     rmarkdown,
     rpart,
+    simling,
+    simr,
+    swirl,
     testthat (>= 3.0.0),
-    tidygam
+    tidygam,
+    tidyverse
 Remotes: mcanzi/simling
 Additional_repositories: https://mcanzi.r-universe.dev
 Config/testthat/edition: 3

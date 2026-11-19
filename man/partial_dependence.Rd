@@ -38,21 +38,22 @@ Statistics for random forests from ranger, but it works with any model
 that has a \code{predict()} method.
 }
 \examples{
-library(simling)
-m <- lm(rt ~ log_freq * length, data = megastudy)
-partial_dependence(m, megastudy, "length", 3:12)
+m <- lm(mpg ~ wt + hp, data = mtcars)
+partial_dependence(m, mtcars, "wt", c(2, 3, 4))
 
-if (requireNamespace("ranger", quietly = TRUE)) {
-  rf <- ranger::ranger(deleted ~ following + morph + rate + age, data = td_deletion,
-                       num.trees = 200, probability = TRUE, seed = 1)
-  partial_dependence(rf, td_deletion, "age", seq(20, 80, by = 10), class = "deleted")
-}
-
-# a logistic regression: average the probabilities, not the log-odds
-m <- glm(deleted ~ age + rate, data = td_deletion, family = binomial)
-partial_dependence(m, td_deletion, "age", c(20, 50, 80), type = "response")
+\dontshow{if (rlang::is_installed("simling")) withAutoprint(\{ # examplesIf}
+td <- simling::td_deletion
+m <- glm(deleted ~ age + rate, data = td, family = binomial)
+partial_dependence(m, td, "age", c(20, 50, 80), type = "response")
+\dontshow{\}) # examplesIf}
+\dontshow{if (rlang::is_installed(c("simling", "ranger"))) withAutoprint(\{ # examplesIf}
+rf <- ranger::ranger(deleted ~ following + morph + rate + age, data = td,
+  num.trees = 200, probability = TRUE, seed = 1)
+partial_dependence(rf, td, "age", seq(20, 80, by = 10), class = "deleted")
+\dontshow{\}) # examplesIf}
 }
 \references{
 Friedman, J. H. (2001). Greedy function approximation: A
-gradient boosting machine. \emph{Annals of Statistics, 29}(5), 1189–1232.
+gradient boosting machine. \emph{Annals of Statistics, 29}(5), 1189-1232.
+\doi{10.1214/aos/1013203451}
 }

@@ -17,20 +17,6 @@ course_folder <- function(course) {
   c(statistics = "statistics", advanced = "advanced_statistics")[course]
 }
 
-# The packages of the Statistics course are in Imports so that installing
-# konstats installs them. konstats itself calls only a few of them; this
-# function, never run, tells R CMD check that the others are used on purpose.
-course_imports <- function() {
-  list(
-    broom::tidy,
-    effsize::cohen.d,
-    janitor::clean_names,
-    lme4::lmer,
-    lmerTest::lmer,
-    palmerpenguins::path_to_file,
-    simling::simling_datasets,
-    simr::powerSim,
-    swirl::swirl,
-    tidyverse::tidyverse_packages
-  )
+is_flag <- function(x) {
+  is.logical(x) && length(x) == 1 && !is.na(x)
 }

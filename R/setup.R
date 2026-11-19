@@ -1,9 +1,8 @@
 #' The packages each course uses
 #'
-#' Lists the packages used in the slides and tutorials of each course. The
-#' packages of the Statistics course are installed together with konstats;
-#' the extra packages of Advanced Statistics are installed with
-#' [install_course()].
+#' Lists the packages used in the slides and tutorials of each course.
+#' [install_course()] installs them and [check_setup()] tells you which are
+#' missing.
 #'
 #' @param course Which course: `"statistics"` or `"advanced"`. `NULL`, the
 #'   default, lists both.
@@ -28,10 +27,12 @@ course_packages <- function(course = NULL) {
 
 #' Install the packages of a course
 #'
-#' Installs the packages a course uses that are not installed yet, from
-#' CRAN. The packages of the Statistics course come with konstats, so
-#' `install_course("advanced")` is the one you need: run it once before the
-#' first session of Advanced Statistics.
+#' Installs the packages a course uses that are not installed yet, with
+#' [utils::install.packages()] from the repositories set in
+#' `getOption("repos")`. Run it once before the first session of a course,
+#' and [check_setup()] afterwards. Installing konstats with
+#' `install.packages("konstats", dependencies = TRUE)` installs the packages
+#' of both courses at once.
 #'
 #' @inheritParams check_setup
 #' @param update If `TRUE`, also reinstall the packages that are already
@@ -39,17 +40,17 @@ course_packages <- function(course = NULL) {
 #'
 #' @return The names of the packages it installed, invisibly.
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
+#' install_course("statistics")
 #' install_course("advanced")
-#' }
-install_course <- function(course = "advanced", update = FALSE) {
+install_course <- function(course = "statistics", update = FALSE) {
   course <- match_course(course)
+  if (!is_flag(update)) {
+    cli::cli_abort("{.arg update} must be {.code TRUE} or {.code FALSE}.")
+  }
   packages <- course_packages(course)$package
   missing <- packages[!vapply(packages, is_installed, logical(1))]
   todo <- if (update) packages else missing
-  # simling is not on CRAN yet: it comes with konstats from GitHub
-  todo <- setdiff(todo, "simling")
   if (length(todo) == 0) {
     cli::cli_alert_success("All packages of {course_name(course)} are installed.")
     return(invisible(character()))
@@ -78,12 +79,11 @@ check_setup <- function(course = "statistics") {
   course <- match_course(course)
   cli::cli_h2("Setup for {course_name(course)}")
 
-  # konstats needs R >= 4.1.0 to load at all, so the version is only reported
   cli::cli_alert_success("R {getRversion()}")
 
   packages <- course_packages(course)$package
-  installed <- vapply(packages, is_installed, logical(1))
-  version <- vapply(packages, package_version_or_na, character(1))
+  installed <- vapply(packages, is_installed, logical(1), USE.NAMES = FALSE)
+  version <- vapply(packages, package_version_or_na, character(1), USE.NAMES = FALSE)
   report <- tibble::tibble(package = packages, installed = installed, version = version)
 
   if (all(installed)) {
@@ -98,7 +98,7 @@ check_setup <- function(course = "statistics") {
     absent <- needed[!has_dataset("simling", needed)]
     if (length(absent) > 0) {
       cli::cli_alert_danger("simling is too old for the course: it has no {.code {absent}}.")
-      cli::cli_alert_info("Run {.run install.packages(\"simling\", repos = c(\"https://mcanzi.r-universe.dev\", \"https://cloud.r-project.org\"))} to update it.")
+      cli::cli_alert_info("Run {.run utils::install.packages(\"simling\")} to update it.")
     }
   }
 
@@ -152,7 +152,6 @@ package_version_or_na <- function(package) {
   as.character(utils::packageVersion(package))
 }
 
-# the simling data sets used in the slides of a course (penguins is from palmerpenguins)
 course_datasets <- function(course) {
   datasets <- lectures(course)$datasets
   datasets <- trimws(unlist(strsplit(datasets[!is.na(datasets)], ",")))

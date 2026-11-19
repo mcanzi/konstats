@@ -3,11 +3,11 @@
 #' Lists the exercise sheets that come with konstats. Each sheet has the
 #' exercises of one tutorial and an empty code chunk for each answer: an R
 #' Markdown file (`.Rmd`) in Statistics, a Quarto document (`.qmd`) in
-#' Advanced Statistics. RStudio opens and renders both. Some sheets end with a weekly assignment, which you
-#' complete at home. Tutorial 1 of Statistics is a guided tutorial, and its
-#' sheet has all the code. Copy one
-#' into your project folder with [get_tutorial()], or all of them with
-#' `get_tutorial("all", dir)`.
+#' Advanced Statistics. RStudio opens and renders both. Some sheets end with
+#' a weekly assignment, which you complete at home. Tutorial 1 of Statistics
+#' is a guided tutorial, and its sheet has all the code. Copy one into your
+#' project folder with [get_tutorial()], or all of them with
+#' `get_tutorial("all", dir)`. The sheets are licensed under CC BY 4.0.
 #'
 #' @param course Which course: `"statistics"` or `"advanced"`. `NULL`, the
 #'   default, lists both.
@@ -32,8 +32,7 @@ tutorials <- function(course = NULL) {
 #'
 #' Copies the exercise sheet of a tutorial into a folder, where you can open
 #' it and write your answers in the empty chunks. If the sheet has a weekly
-#' assignment, it comes at the end, and you hand in the sheet itself (the
-#' `.Rmd` file).
+#' assignment, it comes at the end, and you hand in the sheet itself.
 #'
 #' @param number Number of the tutorial, the same as its lecture, such as
 #'   `4`. Several numbers, such as `2:4`, or `"all"` copy several sheets at
@@ -57,6 +56,7 @@ tutorials <- function(course = NULL) {
 #' get_tutorial(4, dir, open = FALSE)
 #' get_tutorial("all", dir)
 #' list.files(dir)
+#' unlink(dir, recursive = TRUE)
 get_tutorial <- function(number, dir, course = "statistics", overwrite = FALSE, open = interactive()) {
   course <- match_course(course)
   sheets <- tutorials(course)
@@ -74,6 +74,15 @@ get_tutorial <- function(number, dir, course = "statistics", overwrite = FALSE, 
       "{course_name(course)} has no exercise sheet for {cli::qty(length(missing))}tutorial{?s} {missing}.",
       i = "Sheets are available for tutorials {.val {sheets$number}}."
     ))
+  }
+  if (!is.character(dir) || length(dir) != 1 || is.na(dir)) {
+    cli::cli_abort("{.arg dir} must be the path of one folder, such as {.val .}.")
+  }
+  if (!is_flag(overwrite)) {
+    cli::cli_abort("{.arg overwrite} must be {.code TRUE} or {.code FALSE}.")
+  }
+  if (!is_flag(open)) {
+    cli::cli_abort("{.arg open} must be {.code TRUE} or {.code FALSE}.")
   }
   if (!dir.exists(dir)) {
     cli::cli_abort("The folder {.path {dir}} does not exist.")

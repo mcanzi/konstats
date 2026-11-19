@@ -6,8 +6,6 @@ test_that("resid_acf() is 1 at lag 0 and never pairs residuals across groups", {
   expect_named(acf, c("lag", "acf"))
   expect_identical(acf$lag, 0:2)
   expect_equal(acf$acf[1], 1)
-  # both groups rise by 1 at every step, so every lag correlates perfectly;
-  # pairing the 4 at the end of "a" with the 1 at the start of "b" would break that
   expect_equal(acf$acf, c(1, 1, 1))
 })
 
@@ -37,6 +35,7 @@ test_that("partial_dependence() averages predictions over the data", {
 
 test_that("partial_dependence() keeps factor levels and picks a class", {
   skip_if_not_installed("ranger")
+  skip_if_not_installed("simling")
   td <- simling::td_deletion
   rf <- ranger::ranger(deleted ~ following + age, data = td, num.trees = 50, probability = TRUE, seed = 1)
   pd <- partial_dependence(rf, td, "following", levels(td$following), class = "deleted")
@@ -49,9 +48,9 @@ test_that("partial_dependence() keeps factor levels and picks a class", {
 
 test_that("cv_speakers() reproduces the cross-validation in the slides", {
   skip_if_not_installed("ranger")
+  skip_if_not_installed("simling")
   accent <- simling::accent
   f <- l1 ~ vot + vowel_ratio + rate
-  # the code of Advanced Statistics, session 6
   set.seed(2)
   folds <- dplyr::distinct(accent, speaker, l1) |>
     dplyr::mutate(fold = sample(rep(1:5, length.out = dplyr::n())), .by = l1)
@@ -71,6 +70,7 @@ test_that("cv_speakers() reproduces the cross-validation in the slides", {
 
 test_that("cv_speakers() keeps every fold balanced and leaves the random seed alone", {
   skip_if_not_installed("ranger")
+  skip_if_not_installed("simling")
   accent <- simling::accent
   set.seed(10)
   before <- .Random.seed
@@ -80,7 +80,6 @@ test_that("cv_speakers() keeps every fold balanced and leaves the random seed al
   expect_true(all(table(held_out$fold, held_out$observed) == 3))
   expect_identical(nrow(cv), nrow(accent))
   expect_error(cv_speakers(l1 ~ vot, accent, speaker = "talker"), "talker")
-  # 15 speakers per L1: at most 15 folds
   expect_error(cv_speakers(l1 ~ vot, accent, k = 16), "between 2 and 15")
 })
 
@@ -98,7 +97,7 @@ test_that("resid_acf() is NA at lags as long as the groups", {
 })
 
 test_that("partial_dependence() passes arguments to predict()", {
-  d <- simling::td_deletion
+  d <- data.frame(age = rep(c(20, 80), each = 10), deleted = rep(c(0, 1, 1, 0), 5))
   m <- glm(deleted ~ age, data = d, family = binomial)
   pd <- partial_dependence(m, d, "age", c(20, 80), type = "response")
   expect_true(all(pd$prediction > 0 & pd$prediction < 1))
@@ -107,6 +106,38 @@ test_that("partial_dependence() passes arguments to predict()", {
 
 test_that("cv_speakers() asks for a whole number of folds", {
   skip_if_not_installed("ranger")
+  skip_if_not_installed("simling")
   expect_error(cv_speakers(l1 ~ vot, simling::accent, k = 2.5), "between 2")
   expect_error(cv_speakers(l1 ~ vot, simling::accent, k = 1), "between 2")
+})
+
+test_that("resid_acf() rejects input it cannot use", {
+  expect_error(resid_acf(letters[1:6], rep(1:2, 3)), "numeric vector")
+  expect_error(resid_acf(numeric(), character()), "numeric vector")
+  expect_error(resid_acf(1:6, c(1, 1, NA, NA, 2, 2)), "missing values")
+  expect_error(resid_acf(1:6, rep(1:2, 3), max_lag = "a"), "whole number")
+})
+
+test_that("partial_dependence() rejects empty data, empty values and unknown levels", {
+  d <- data.frame(x = 1:10, f = factor(rep(c("a", "b"), 5)))
+  d$y <- 2 * d$x + (d$f == "b")
+  m <- lm(y ~ x + f, data = d)
+  expect_error(partial_dependence(m, d[0, ], "x", 1:2), "at least one row")
+  expect_error(partial_dependence(m, as.list(d), "x", 1), "data frame")
+  expect_error(partial_dependence(m, d, "x", numeric()), "at least one value")
+  expect_error(partial_dependence(m, d, "f", c("a", "c")), "not a level")
+  expect_identical(nrow(partial_dependence(m, d, "f", c("a", "b"))), 2L)
+})
+
+test_that("cv_speakers() asks for a formula, a data frame and two speakers", {
+  skip_if_not_installed("ranger")
+  d <- data.frame(speaker = rep(c("s1", "s2"), each = 5), y = factor(rep(c("a", "b"), each = 5)), x = 1:10)
+  expect_error(cv_speakers("y ~ x", d), "formula")
+  expect_error(cv_speakers(y ~ x, as.list(d)), "data frame")
+  expect_error(cv_speakers(y ~ x, d[0, ]), "two speakers")
+})
+
+test_that("theme_paper() asks for a positive base size", {
+  expect_error(theme_paper("a"), "positive number")
+  expect_error(theme_paper(-1), "positive number")
 })

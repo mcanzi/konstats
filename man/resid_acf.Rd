@@ -16,8 +16,8 @@ resid_acf(res, group, max_lag = 8)
 }
 \value{
 A tibble with one row per lag and the columns \code{lag} and \code{acf}.
-The autocorrelation at lag 0 is always 1. It is \code{NA} at lags as long as
-the groups, where there are too few pairs of residuals left.
+The autocorrelation at lag 0 is 1. It is \code{NA} at lags where fewer than
+three pairs of residuals are left, such as lags as long as the groups.
 }
 \description{
 Computes the autocorrelation of model residuals within each trajectory,
@@ -34,9 +34,11 @@ each group, and \code{res} and \code{group} must have the same length: if the mo
 dropped rows with missing values, drop them from \code{group} too.
 }
 \examples{
-library(simling)
-# a straight line through the PRICE trajectories: the residuals of
-# neighbouring measurements are strongly correlated
-m <- lm(f2 ~ time, data = price_f2)
-resid_acf(residuals(m), price_f2$traj)
+res <- c(1, 2, 3, 4, 1, 2, 3, 4)
+resid_acf(res, rep(c("a", "b"), each = 4), max_lag = 2)
+
+\dontshow{if (rlang::is_installed("simling")) withAutoprint(\{ # examplesIf}
+m <- lm(f2 ~ time, data = simling::price_f2)
+resid_acf(residuals(m), simling::price_f2$traj)
+\dontshow{\}) # examplesIf}
 }

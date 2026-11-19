@@ -22,12 +22,13 @@
 #'   \item{slides}{Address of the slides. `NA` for sessions still in
 #'   preparation.}
 #' }
+#' @references Winter, B. (2019). *Statistics for linguists: An introduction
+#'   using R*. Routledge. \doi{10.4324/9781315165547}
 #' @export
 #' @examples
 #' lectures()
 #' lectures("advanced")
 #'
-#' # lectures that use a given data set
 #' lecs <- lectures()
 #' lecs[grepl("megastudy", lecs$datasets), c("course", "number", "topic")]
 lectures <- function(course = NULL) {

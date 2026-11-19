@@ -6,13 +6,12 @@ test_that("course_packages() lists both courses, without duplicates", {
   expect_identical(unique(course_packages("advanced")$course), "advanced")
 })
 
-test_that("Statistics packages are in Imports and Advanced packages in Imports or Suggests", {
+test_that("the packages of both courses are in Suggests, not Imports", {
   desc <- read.dcf(system.file("DESCRIPTION", package = "konstats"), fields = c("Imports", "Suggests"))
   deps <- function(field) trimws(sub("\\(.*", "", strsplit(desc[, field], ",")[[1]]))
-  imports <- deps("Imports")
-  suggests <- deps("Suggests")
-  expect_true(all(course_packages("statistics")$package %in% imports))
-  expect_true(all(course_packages("advanced")$package %in% c(imports, suggests)))
+  course <- unique(course_packages()$package)
+  expect_true(all(course %in% deps("Suggests")))
+  expect_false(any(course %in% deps("Imports")))
 })
 
 test_that("check_setup() returns one row per package", {
@@ -20,10 +19,12 @@ test_that("check_setup() returns one row per package", {
   expect_s3_class(report, "tbl_df")
   expect_identical(report$package, course_packages("statistics")$package)
   expect_type(report$installed, "logical")
-  expect_true(all(report$installed))
+  expect_identical(report$installed, nzchar(vapply(report$package, \(p) system.file(package = p), character(1), USE.NAMES = FALSE)))
+  expect_null(names(report$installed))
 })
 
 test_that("simling has every data set the slides use", {
+  skip_if_not_installed("simling")
   for (course in c("statistics", "advanced")) {
     needed <- konstats:::course_datasets(course)
     expect_gt(length(needed), 0)
@@ -36,4 +37,10 @@ test_that("a course must be statistics or advanced", {
   expect_error(course_packages("maths"), "statistics")
   expect_error(check_setup(c("statistics", "advanced")), "statistics")
   expect_identical(nrow(course_packages("Advanced")), nrow(course_packages("advanced")))
+})
+
+test_that("install_course() installs nothing when every package is there", {
+  local_mocked_bindings(is_installed = function(package) TRUE)
+  expect_identical(suppressMessages(install_course("advanced")), character())
+  expect_error(install_course("statistics", update = NA), "update")
 })

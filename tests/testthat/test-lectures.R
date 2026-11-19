@@ -9,6 +9,7 @@ test_that("lectures() lists 13 + 12 lectures, numbered from 1", {
 })
 
 test_that("every data set listed is in simling or is penguins", {
+  skip_if_not_installed("simling")
   sets <- unlist(strsplit(stats::na.omit(lectures()$datasets), ", "))
   simling_sets <- utils::data(package = "simling")$results[, "Item"]
   expect_true(all(sets %in% c(simling_sets, "penguins")), label = paste(setdiff(sets, c(simling_sets, "penguins")), collapse = ", "))
@@ -28,6 +29,5 @@ test_that("slides() finds a lecture by its topic", {
   expect_error(slides(20, open = FALSE), "no lecture 20")
   expect_error(slides(c(1, 2), open = FALSE), "one lecture")
   expect_error(slides(" ", open = FALSE), "one lecture")
-  # a topic is matched as text, not as a regular expression
   expect_error(slides("models (", open = FALSE), "No lecture")
 })

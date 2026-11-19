@@ -47,9 +47,8 @@ default seed, the folds and forests are the ones in the slides of
 Advanced Statistics, session 6.
 }
 \examples{
-if (requireNamespace("ranger", quietly = TRUE)) {
-  library(simling)
-  cv <- cv_speakers(l1 ~ vot + vowel_ratio + rate, accent, num_trees = 100)
-  mean(cv$predicted == cv$observed)
-}
+\dontshow{if (rlang::is_installed(c("simling", "ranger"))) withAutoprint(\{ # examplesIf}
+cv <- cv_speakers(l1 ~ vot + vowel_ratio + rate, simling::accent, num_trees = 100)
+mean(cv$predicted == cv$observed)
+\dontshow{\}) # examplesIf}
 }

@@ -17,14 +17,20 @@ A ggplot2 theme.
 \description{
 A plain theme for figures in papers and theses: white background, light
 grid without minor lines, bold left-aligned facet labels, a title that
-starts at the left edge of the figure and the legend at the bottom. Built in Advanced Statistics,
-session 11. \code{ggplot2::theme_set(theme_paper())} makes it the default.
+starts at the left edge of the figure and the legend at the bottom.
+Built in Advanced Statistics, session 11. \code{ggplot2::theme_set(theme_paper())} makes it the default.
 }
 \examples{
 library(ggplot2)
-library(simling)
-ggplot(vowel_duration, aes(x = voicing, y = duration)) +
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(x = "Cylinders", y = "Miles per gallon") +
+  theme_paper()
+
+\dontshow{if (rlang::is_installed("simling")) withAutoprint(\{ # examplesIf}
+ggplot(simling::vowel_duration, aes(x = voicing, y = duration)) +
   geom_boxplot() +
   labs(x = "Following consonant", y = "Vowel duration (ms)") +
   theme_paper()
+\dontshow{\}) # examplesIf}
 }

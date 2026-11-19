@@ -19,10 +19,9 @@ A tibble with one row per package and course, and the columns:
 }
 }
 \description{
-Lists the packages used in the slides and tutorials of each course. The
-packages of the Statistics course are installed together with konstats;
-the extra packages of Advanced Statistics are installed with
-\code{\link[=install_course]{install_course()}}.
+Lists the packages used in the slides and tutorials of each course.
+\code{\link[=install_course]{install_course()}} installs them and \code{\link[=check_setup]{check_setup()}} tells you which are
+missing.
 }
 \examples{
 course_packages()

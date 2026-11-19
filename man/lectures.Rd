@@ -36,7 +36,10 @@ they use and the address of their slides.
 lectures()
 lectures("advanced")
 
-# lectures that use a given data set
 lecs <- lectures()
 lecs[grepl("megastudy", lecs$datasets), c("course", "number", "topic")]
+}
+\references{
+Winter, B. (2019). \emph{Statistics for linguists: An introduction
+using R}. Routledge. \doi{10.4324/9781315165547}
 }

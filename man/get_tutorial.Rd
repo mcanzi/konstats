@@ -37,8 +37,7 @@ The paths of the sheets in \code{dir}, invisibly.
 \description{
 Copies the exercise sheet of a tutorial into a folder, where you can open
 it and write your answers in the empty chunks. If the sheet has a weekly
-assignment, it comes at the end, and you hand in the sheet itself (the
-\code{.Rmd} file).
+assignment, it comes at the end, and you hand in the sheet itself.
 }
 \examples{
 dir <- tempfile()
@@ -46,4 +45,5 @@ dir.create(dir)
 get_tutorial(4, dir, open = FALSE)
 get_tutorial("all", dir)
 list.files(dir)
+unlink(dir, recursive = TRUE)
 }

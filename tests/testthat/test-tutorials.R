@@ -3,7 +3,6 @@ test_that("tutorials() lists the sheets with their lecture and topic", {
   expect_s3_class(sheets, "tbl_df")
   expect_gt(nrow(sheets), 0)
   lecs <- lectures()
-  # a guided tutorial (Statistics tutorial 1) has a title of its own
   guided <- vapply(konstats:::tutorial_files("statistics"), \(f) any(readLines(f, n = 10) == "guided: true"), logical(1))
   guided <- sheets$course == "statistics" & sheets$file %in% basename(names(guided)[guided])
   for (i in which(!guided)) {
@@ -72,4 +71,19 @@ test_that("the assignment template exists", {
   template <- system.file("rmarkdown", "templates", "assignment", package = "konstats")
   expect_true(file.exists(file.path(template, "template.yaml")))
   expect_true(file.exists(file.path(template, "skeleton", "skeleton.Rmd")))
+})
+
+test_that("get_tutorial() checks dir, overwrite and open", {
+  dir <- new_tempdir()
+  expect_error(get_tutorial(4, c(dir, dir), open = FALSE), "one folder")
+  expect_error(get_tutorial(4, NA, open = FALSE), "one folder")
+  expect_error(get_tutorial(4, dir, overwrite = NA, open = FALSE), "overwrite")
+  expect_error(get_tutorial(4, dir, open = NA), "open")
+})
+
+test_that("get_tutorial() copies into a folder with spaces in its name", {
+  dir <- file.path(new_tempdir(), "my course folder")
+  dir.create(dir)
+  path <- suppressMessages(get_tutorial(4, dir, open = FALSE))
+  expect_true(file.exists(path))
 })

@@ -1,5 +1,27 @@
 # konstats (development version)
 
+* konstats is an open course in statistics for linguists, which is also
+  taught at the University of Konstanz.
+* The packages of both courses are in Suggests, so installing konstats no
+  longer installs them. `install_course()` installs the packages of a course
+  and now defaults to `"statistics"`; `install.packages("konstats",
+  dependencies = TRUE)` installs the packages of both courses.
+* `check_setup()` suggests `install.packages("simling")` when simling is too
+  old for a course.
+* `cv_speakers()` uses `rlang::check_installed()`, which offers to install
+  ranger when it is missing.
+* Examples and tests run without the suggested packages.
+* `partial_dependence()` stops with an error for values that are not levels
+  of a factor, for data without rows and for empty `values`. It used to
+  return wrong or `NaN` predictions.
+* `resid_acf()` stops with an error for residuals that are not numeric and
+  for groups with missing values.
+* `cv_speakers()`, `theme_paper()`, `get_tutorial()` and `install_course()`
+  check their arguments and say plainly what is wrong.
+* `check_setup()` returns a tibble without names on its columns.
+* The exercise sheets are licensed under CC BY 4.0, as stated in
+  `inst/COPYRIGHTS`.
+* The help pages cite Winter (2019) and Friedman (2001) with their DOIs.
 * The Advanced Statistics exercise sheets are Quarto documents (`.qmd`), like
   the slides of the course. `tutorials()` and `get_tutorial()` handle both
   `.qmd` and `.Rmd` sheets; the Statistics sheets are still R Markdown.

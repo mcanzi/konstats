@@ -4,7 +4,7 @@
 \alias{install_course}
 \title{Install the packages of a course}
 \usage{
-install_course(course = "advanced", update = FALSE)
+install_course(course = "statistics", update = FALSE)
 }
 \arguments{
 \item{course}{Which course: \code{"statistics"} or \code{"advanced"}.}
@@ -16,13 +16,16 @@ installed, to get their latest versions.}
 The names of the packages it installed, invisibly.
 }
 \description{
-Installs the packages a course uses that are not installed yet, from
-CRAN. The packages of the Statistics course come with konstats, so
-\code{install_course("advanced")} is the one you need: run it once before the
-first session of Advanced Statistics.
+Installs the packages a course uses that are not installed yet, with
+\code{\link[utils:install.packages]{utils::install.packages()}} from the repositories set in
+\code{getOption("repos")}. Run it once before the first session of a course,
+and \code{\link[=check_setup]{check_setup()}} afterwards. Installing konstats with
+\code{install.packages("konstats", dependencies = TRUE)} installs the packages
+of both courses at once.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+install_course("statistics")
 install_course("advanced")
-}
+\dontshow{\}) # examplesIf}
 }
