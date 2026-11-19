@@ -1,5 +1,12 @@
 # Changelog
 
+## konstats (development version)
+
+- Each Statistics exercise sheet names the chapters of Winter (2019) it
+  goes with and ends with the full reference. The README and the package
+  help say that the examples and data sets of the course are new and
+  that the course is not endorsed by Winter or Routledge.
+
 ## konstats 0.2.0
 
 - konstats is an open course in statistics for linguists, which is also
