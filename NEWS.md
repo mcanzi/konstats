@@ -1,5 +1,8 @@
 # konstats (development version)
 
+* `install_course()` installs from R-universe as well as the repositories
+  set in `getOption("repos")`, so it finds simling, which is not on CRAN.
+  `check_setup()` suggests installing simling from R-universe.
 * Each Statistics exercise sheet names the chapters of Winter (2019) it goes
   with and ends with the full reference. The README and the package help say
   that the examples and data sets of the course are new and that the course

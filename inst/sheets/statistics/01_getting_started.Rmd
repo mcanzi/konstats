@@ -91,11 +91,11 @@ slides("mixed models 1")
 
 ### 1.6 Exercise sheets
 
-From next week, each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer.
+From next week, each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer. `tutorials()` lists the sheets, and `get_tutorial()` copies one into your project folder:
 
 ```{r, eval = FALSE}
-tutorials("statistics")    # which sheets there are
-get_tutorial(2, ".")       # copy sheet 2 into your project folder
+tutorials("statistics")
+get_tutorial(2, ".")
 ```
 
 . . .
@@ -118,7 +118,7 @@ It has a section for each exercise.
 
 ### 2.1 What simling is
 
-`{simling}` has 56 simulated data sets, from 20 branches of linguistics. From lecture 5 on, most examples in the slides use them.
+`{simling}` has 57 simulated data sets, from 20 branches of linguistics. From lecture 5 on, most examples in the slides use them.
 
 . . .
 

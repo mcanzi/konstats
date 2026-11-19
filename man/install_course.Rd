@@ -17,8 +17,9 @@ The names of the packages it installed, invisibly.
 }
 \description{
 Installs the packages a course uses that are not installed yet, with
-\code{\link[utils:install.packages]{utils::install.packages()}} from the repositories set in
-\code{getOption("repos")}. Run it once before the first session of a course,
+\code{\link[utils:install.packages]{utils::install.packages()}} from R-universe
+(\url{https://mcanzi.r-universe.dev}, where simling is) and the repositories
+set in \code{getOption("repos")}. Run it once before the first session of a course,
 and \code{\link[=check_setup]{check_setup()}} afterwards. Installing konstats with
 \code{install.packages("konstats", dependencies = TRUE)} installs the packages
 of both courses at once.

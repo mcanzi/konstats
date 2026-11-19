@@ -28,8 +28,9 @@ course_packages <- function(course = NULL) {
 #' Install the packages of a course
 #'
 #' Installs the packages a course uses that are not installed yet, with
-#' [utils::install.packages()] from the repositories set in
-#' `getOption("repos")`. Run it once before the first session of a course,
+#' [utils::install.packages()] from R-universe
+#' (<https://mcanzi.r-universe.dev>, where simling is) and the repositories
+#' set in `getOption("repos")`. Run it once before the first session of a course,
 #' and [check_setup()] afterwards. Installing konstats with
 #' `install.packages("konstats", dependencies = TRUE)` installs the packages
 #' of both courses at once.
@@ -56,7 +57,7 @@ install_course <- function(course = "statistics", update = FALSE) {
     return(invisible(character()))
   }
   cli::cli_alert_info("Installing {length(todo)} package{?s}: {.pkg {todo}}")
-  utils::install.packages(todo)
+  utils::install.packages(todo, repos = course_repos())
   invisible(todo)
 }
 
@@ -98,7 +99,7 @@ check_setup <- function(course = "statistics") {
     absent <- needed[!has_dataset("simling", needed)]
     if (length(absent) > 0) {
       cli::cli_alert_danger("simling is too old for the course: it has no {.code {absent}}.")
-      cli::cli_alert_info("Run {.run utils::install.packages(\"simling\")} to update it.")
+      cli::cli_alert_info("Run {.run utils::install.packages(\"simling\", repos = \"https://mcanzi.r-universe.dev\")} to update it.")
     }
   }
 

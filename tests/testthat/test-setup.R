@@ -44,3 +44,17 @@ test_that("install_course() installs nothing when every package is there", {
   expect_identical(suppressMessages(install_course("advanced")), character())
   expect_error(install_course("statistics", update = NA), "update")
 })
+
+test_that("install_course() installs from R-universe and CRAN", {
+  old <- options(repos = c(CRAN = "@CRAN@"))
+  on.exit(options(old), add = TRUE)
+  expect_identical(
+    course_repos(),
+    c(universe = "https://mcanzi.r-universe.dev", CRAN = "https://cloud.r-project.org")
+  )
+  options(repos = c(CRAN = "https://cran.example.org", universe = "https://mcanzi.r-universe.dev"))
+  expect_identical(
+    course_repos(),
+    c(universe = "https://mcanzi.r-universe.dev", CRAN = "https://cran.example.org")
+  )
+})

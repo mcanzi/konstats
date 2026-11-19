@@ -20,3 +20,12 @@ course_folder <- function(course) {
 is_flag <- function(x) {
   is.logical(x) && length(x) == 1 && !is.na(x)
 }
+
+course_repos <- function() {
+  repos <- getOption("repos")
+  repos <- repos[!is.na(repos) & repos != "@CRAN@"]
+  if (!"CRAN" %in% names(repos)) {
+    repos <- c(repos, CRAN = "https://cloud.r-project.org")
+  }
+  c(universe = "https://mcanzi.r-universe.dev", repos[repos != "https://mcanzi.r-universe.dev"])
+}
