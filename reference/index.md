@@ -38,5 +38,4 @@
 
 - [`konstats`](https://mcanzi.de/konstats/reference/konstats-package.md)
   [`konstats-package`](https://mcanzi.de/konstats/reference/konstats-package.md)
-  : konstats: Course Materials for Statistics in Linguistics at the
-  University of Konstanz
+  : konstats: Open Course in Statistics for Linguists

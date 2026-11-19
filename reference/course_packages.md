@@ -1,9 +1,10 @@
 # The packages each course uses
 
-Lists the packages used in the slides and tutorials of each course. The
-packages of the Statistics course are installed together with konstats;
-the extra packages of Advanced Statistics are installed with
-[`install_course()`](https://mcanzi.de/konstats/reference/install_course.md).
+Lists the packages used in the slides and tutorials of each course.
+[`install_course()`](https://mcanzi.de/konstats/reference/install_course.md)
+installs them and
+[`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
+tells you which are missing.
 
 ## Usage
 

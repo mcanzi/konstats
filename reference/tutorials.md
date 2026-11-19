@@ -8,7 +8,8 @@ with a weekly assignment, which you complete at home. Tutorial 1 of
 Statistics is a guided tutorial, and its sheet has all the code. Copy
 one into your project folder with
 [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md),
-or all of them with `get_tutorial("all", dir)`.
+or all of them with `get_tutorial("all", dir)`. The sheets are licensed
+under CC BY 4.0.
 
 ## Usage
 

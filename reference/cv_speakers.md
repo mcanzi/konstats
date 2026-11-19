@@ -63,10 +63,7 @@ Advanced Statistics, session 6.
 ## Examples
 
 ``` r
-if (requireNamespace("ranger", quietly = TRUE)) {
-  library(simling)
-  cv <- cv_speakers(l1 ~ vot + vowel_ratio + rate, accent, num_trees = 100)
-  mean(cv$predicted == cv$observed)
-}
+cv <- cv_speakers(l1 ~ vot + vowel_ratio + rate, simling::accent, num_trees = 100)
+mean(cv$predicted == cv$observed)
 #> [1] 0.875
 ```

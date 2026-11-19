@@ -53,33 +53,33 @@ A tibble with one row per value and the columns `value` and
 ## References
 
 Friedman, J. H. (2001). Greedy function approximation: A gradient
-boosting machine. *Annals of Statistics, 29*(5), 1189–1232.
+boosting machine. *Annals of Statistics, 29*(5), 1189-1232.
+[doi:10.1214/aos/1013203451](https://doi.org/10.1214/aos/1013203451)
 
 ## Examples
 
 ``` r
-library(simling)
-m <- lm(rt ~ log_freq * length, data = megastudy)
-partial_dependence(m, megastudy, "length", 3:12)
-#> # A tibble: 10 × 2
-#>    value prediction
-#>    <int>      <dbl>
-#>  1     3       724.
-#>  2     4       736.
-#>  3     5       749.
-#>  4     6       762.
-#>  5     7       775.
-#>  6     8       787.
-#>  7     9       800.
-#>  8    10       813.
-#>  9    11       826.
-#> 10    12       838.
+m <- lm(mpg ~ wt + hp, data = mtcars)
+partial_dependence(m, mtcars, "wt", c(2, 3, 4))
+#> # A tibble: 3 × 2
+#>   value prediction
+#>   <dbl>      <dbl>
+#> 1     2       24.8
+#> 2     3       20.9
+#> 3     4       17.1
 
-if (requireNamespace("ranger", quietly = TRUE)) {
-  rf <- ranger::ranger(deleted ~ following + morph + rate + age, data = td_deletion,
-                       num.trees = 200, probability = TRUE, seed = 1)
-  partial_dependence(rf, td_deletion, "age", seq(20, 80, by = 10), class = "deleted")
-}
+td <- simling::td_deletion
+m <- glm(deleted ~ age + rate, data = td, family = binomial)
+partial_dependence(m, td, "age", c(20, 50, 80), type = "response")
+#> # A tibble: 3 × 2
+#>   value prediction
+#>   <dbl>      <dbl>
+#> 1    20      0.749
+#> 2    50      0.579
+#> 3    80      0.389
+rf <- ranger::ranger(deleted ~ following + morph + rate + age, data = td,
+  num.trees = 200, probability = TRUE, seed = 1)
+partial_dependence(rf, td, "age", seq(20, 80, by = 10), class = "deleted")
 #> # A tibble: 7 × 2
 #>   value prediction
 #>   <dbl>      <dbl>
@@ -90,14 +90,4 @@ if (requireNamespace("ranger", quietly = TRUE)) {
 #> 5    60      0.514
 #> 6    70      0.497
 #> 7    80      0.410
-
-# a logistic regression: average the probabilities, not the log-odds
-m <- glm(deleted ~ age + rate, data = td_deletion, family = binomial)
-partial_dependence(m, td_deletion, "age", c(20, 50, 80), type = "response")
-#> # A tibble: 3 × 2
-#>   value prediction
-#>   <dbl>      <dbl>
-#> 1    20      0.749
-#> 2    50      0.579
-#> 3    80      0.389
 ```

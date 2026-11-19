@@ -30,8 +30,13 @@ A ggplot2 theme.
 
 ``` r
 library(ggplot2)
-library(simling)
-ggplot(vowel_duration, aes(x = voicing, y = duration)) +
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot() +
+  labs(x = "Cylinders", y = "Miles per gallon") +
+  theme_paper()
+
+
+ggplot(simling::vowel_duration, aes(x = voicing, y = duration)) +
   geom_boxplot() +
   labs(x = "Following consonant", y = "Vowel duration (ms)") +
   theme_paper()

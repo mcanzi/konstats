@@ -1,14 +1,18 @@
 # Install the packages of a course
 
-Installs the packages a course uses that are not installed yet, from
-CRAN. The packages of the Statistics course come with konstats, so
-`install_course("advanced")` is the one you need: run it once before the
-first session of Advanced Statistics.
+Installs the packages a course uses that are not installed yet, with
+[`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html)
+from the repositories set in `getOption("repos")`. Run it once before
+the first session of a course, and
+[`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
+afterwards. Installing konstats with
+`install.packages("konstats", dependencies = TRUE)` installs the
+packages of both courses at once.
 
 ## Usage
 
 ``` r
-install_course(course = "advanced", update = FALSE)
+install_course(course = "statistics", update = FALSE)
 ```
 
 ## Arguments
@@ -29,7 +33,8 @@ The names of the packages it installed, invisibly.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
+if (FALSE) { # interactive()
+install_course("statistics")
 install_course("advanced")
-} # }
+}
 ```

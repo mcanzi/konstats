@@ -15,7 +15,7 @@ accuracy overestimates when tokens of the same speaker are alike."><meta propert
 
     <a class="navbar-brand me-2" href="../index.html">konstats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,11 +107,8 @@ Advanced Statistics, session 6.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"ranger"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mcanzi/simling" class="external-link">simling</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">cv</span> <span class="op">&lt;-</span> <span class="fu">cv_speakers</span><span class="op">(</span><span class="va">l1</span> <span class="op">~</span> <span class="va">vot</span> <span class="op">+</span> <span class="va">vowel_ratio</span> <span class="op">+</span> <span class="va">rate</span>, <span class="va">accent</span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cv</span><span class="op">$</span><span class="va">predicted</span> <span class="op">==</span> <span class="va">cv</span><span class="op">$</span><span class="va">observed</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">cv</span> <span class="op">&lt;-</span> <span class="fu">cv_speakers</span><span class="op">(</span><span class="va">l1</span> <span class="op">~</span> <span class="va">vot</span> <span class="op">+</span> <span class="va">vowel_ratio</span> <span class="op">+</span> <span class="va">rate</span>, <span class="fu">simling</span><span class="fu">::</span><span class="va"><a href="https://mcanzi.de/simling/reference/accent.html" class="external-link">accent</a></span>, num_trees <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">cv</span><span class="op">$</span><span class="va">predicted</span> <span class="op">==</span> <span class="va">cv</span><span class="op">$</span><span class="va">observed</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.875</span>
 </code></pre></div>
     </div>

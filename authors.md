@@ -10,14 +10,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/mcanzi/konstats/blob/main/DESCRIPTION)
 
-Canzi M (2026). *konstats: Course Materials for Statistics in
-Linguistics at the University of Konstanz*. R package version
-0.1.0.9000, <https://github.com/mcanzi/konstats>.
+Canzi M (2026). *konstats: Open Course in Statistics for Linguists*. R
+package version 0.2.0, <https://github.com/mcanzi/konstats>.
 
     @Manual{,
-      title = {konstats: Course Materials for Statistics in Linguistics at the University of Konstanz},
+      title = {konstats: Open Course in Statistics for Linguists},
       author = {Massimiliano Canzi},
       year = {2026},
-      note = {R package version 0.1.0.9000},
+      note = {R package version 0.2.0},
       url = {https://github.com/mcanzi/konstats},
     }

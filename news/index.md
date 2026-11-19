@@ -1,7 +1,41 @@
 # Changelog
 
-## konstats (development version)
+## konstats 0.2.0
 
+- konstats is an open course in statistics for linguists, which is also
+  taught at the University of Konstanz.
+- The packages of both courses are in Suggests, so installing konstats
+  no longer installs them.
+  [`install_course()`](https://mcanzi.de/konstats/reference/install_course.md)
+  installs the packages of a course and now defaults to `"statistics"`;
+  `install.packages("konstats", dependencies = TRUE)` installs the
+  packages of both courses.
+- [`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
+  suggests `install.packages("simling")` when simling is too old for a
+  course.
+- [`cv_speakers()`](https://mcanzi.de/konstats/reference/cv_speakers.md)
+  uses
+  [`rlang::check_installed()`](https://rlang.r-lib.org/reference/is_installed.html),
+  which offers to install ranger when it is missing.
+- Examples and tests run without the suggested packages.
+- [`partial_dependence()`](https://mcanzi.de/konstats/reference/partial_dependence.md)
+  stops with an error for values that are not levels of a factor, for
+  data without rows and for empty `values`. It used to return wrong or
+  `NaN` predictions.
+- [`resid_acf()`](https://mcanzi.de/konstats/reference/resid_acf.md)
+  stops with an error for residuals that are not numeric and for groups
+  with missing values.
+- [`cv_speakers()`](https://mcanzi.de/konstats/reference/cv_speakers.md),
+  [`theme_paper()`](https://mcanzi.de/konstats/reference/theme_paper.md),
+  [`get_tutorial()`](https://mcanzi.de/konstats/reference/get_tutorial.md)
+  and
+  [`install_course()`](https://mcanzi.de/konstats/reference/install_course.md)
+  check their arguments and say plainly what is wrong.
+- [`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
+  returns a tibble without names on its columns.
+- The exercise sheets are licensed under CC BY 4.0, as stated in
+  `inst/COPYRIGHTS`.
+- The help pages cite Winter (2019) and Friedman (2001) with their DOIs.
 - The Advanced Statistics exercise sheets are Quarto documents (`.qmd`),
   like the slides of the course.
   [`tutorials()`](https://mcanzi.de/konstats/reference/tutorials.md) and

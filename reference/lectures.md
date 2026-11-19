@@ -52,6 +52,12 @@ A tibble with one row per lecture and the columns:
 
   Address of the slides. `NA` for sessions still in preparation.
 
+## References
+
+Winter, B. (2019). *Statistics for linguists: An introduction using R*.
+Routledge.
+[doi:10.4324/9781315165547](https://doi.org/10.4324/9781315165547)
+
 ## Examples
 
 ``` r
@@ -87,7 +93,6 @@ lectures("advanced")
 #> 11 advanced     11 Cluster analysis in practice  NA     web_reg… TRUE     https…
 #> 12 advanced     12 Figures for publication       NA     lexical… FALSE    https…
 
-# lectures that use a given data set
 lecs <- lectures()
 lecs[grepl("megastudy", lecs$datasets), c("course", "number", "topic")]
 #> # A tibble: 3 × 3

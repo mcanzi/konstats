@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">konstats</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,8 +33,25 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="konstats-development-version">konstats (development version)<a class="anchor" aria-label="anchor" href="#konstats-development-version"></a></h2>
-<ul><li>The Advanced Statistics exercise sheets are Quarto documents (<code>.qmd</code>), like the slides of the course. <code><a href="../reference/tutorials.html">tutorials()</a></code> and <code><a href="../reference/get_tutorial.html">get_tutorial()</a></code> handle both <code>.qmd</code> and <code>.Rmd</code> sheets; the Statistics sheets are still R Markdown.</li>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="konstats-020">konstats 0.2.0<a class="anchor" aria-label="anchor" href="#konstats-020"></a></h2>
+<ul><li>konstats is an open course in statistics for linguists, which is also taught at the University of Konstanz.</li>
+<li>The packages of both courses are in Suggests, so installing konstats no longer installs them. <code><a href="../reference/install_course.html">install_course()</a></code> installs the packages of a course and now defaults to <code>"statistics"</code>; <code>install.packages("konstats", dependencies = TRUE)</code> installs the packages of both courses.</li>
+<li>
+<code><a href="../reference/check_setup.html">check_setup()</a></code> suggests <code>install.packages("simling")</code> when simling is too old for a course.</li>
+<li>
+<code><a href="../reference/cv_speakers.html">cv_speakers()</a></code> uses <code><a href="https://rlang.r-lib.org/reference/is_installed.html" class="external-link">rlang::check_installed()</a></code>, which offers to install ranger when it is missing.</li>
+<li>Examples and tests run without the suggested packages.</li>
+<li>
+<code><a href="../reference/partial_dependence.html">partial_dependence()</a></code> stops with an error for values that are not levels of a factor, for data without rows and for empty <code>values</code>. It used to return wrong or <code>NaN</code> predictions.</li>
+<li>
+<code><a href="../reference/resid_acf.html">resid_acf()</a></code> stops with an error for residuals that are not numeric and for groups with missing values.</li>
+<li>
+<code><a href="../reference/cv_speakers.html">cv_speakers()</a></code>, <code><a href="../reference/theme_paper.html">theme_paper()</a></code>, <code><a href="../reference/get_tutorial.html">get_tutorial()</a></code> and <code><a href="../reference/install_course.html">install_course()</a></code> check their arguments and say plainly what is wrong.</li>
+<li>
+<code><a href="../reference/check_setup.html">check_setup()</a></code> returns a tibble without names on its columns.</li>
+<li>The exercise sheets are licensed under CC BY 4.0, as stated in <code>inst/COPYRIGHTS</code>.</li>
+<li>The help pages cite Winter (2019) and Friedman (2001) with their DOIs.</li>
+<li>The Advanced Statistics exercise sheets are Quarto documents (<code>.qmd</code>), like the slides of the course. <code><a href="../reference/tutorials.html">tutorials()</a></code> and <code><a href="../reference/get_tutorial.html">get_tutorial()</a></code> handle both <code>.qmd</code> and <code>.Rmd</code> sheets; the Statistics sheets are still R Markdown.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="konstats-010">konstats 0.1.0<a class="anchor" aria-label="anchor" href="#konstats-010"></a></h2>
