@@ -2,8 +2,9 @@
 
 Installs the packages a course uses that are not installed yet, with
 [`utils::install.packages()`](https://rdrr.io/r/utils/install.packages.html)
-from the repositories set in `getOption("repos")`. Run it once before
-the first session of a course, and
+from R-universe (<https://mcanzi.r-universe.dev>, where simling is) and
+the repositories set in `getOption("repos")`. Run it once before the
+first session of a course, and
 [`check_setup()`](https://mcanzi.de/konstats/reference/check_setup.md)
 afterwards. Installing konstats with
 `install.packages("konstats", dependencies = TRUE)` installs the
