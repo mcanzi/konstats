@@ -124,7 +124,7 @@ Assume that petal length and width are in cm. Add two columns to `data_no_sepal_
 
 Repeat all the steps above in a single chain with `|>`: start from the `iris` data set, carry out every step from 1.1 to 3.1, and save the result as `data`.
 
-*Hint*: think about the order of the steps. After `clean_names()`, the column names change.
+Hint: think about the order of the steps. After `clean_names()`, the column names change.
 
 ```{r}
 

@@ -88,7 +88,7 @@ There are two ways around it. You can remove the rows with missing values with `
 
 ```
 
-The two numbers differ. Why? *Hint*: compare the number of rows.
+The two numbers differ. Why? Hint: compare the number of rows.
 
 ```{r}
 
@@ -194,7 +194,7 @@ Which island has the heaviest penguins on average? Sort the result from heaviest
 
 ```
 
-Is this a fair comparison between islands? *Hint*: run `count(penguins, island, species)`.
+Is this a fair comparison between islands? Hint: run `count(penguins, island, species)`.
 
 ```{r}
 

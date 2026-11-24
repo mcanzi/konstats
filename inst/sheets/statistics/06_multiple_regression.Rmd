@@ -67,7 +67,7 @@ Fit two models: `aoa` as a function of `signers`, and `aoa` as a function of `no
 
 ---
 
-## 2. One model, two predictors
+## 2. Fitting a multiple regression
 
 ### 2.1 Multiple regression
 

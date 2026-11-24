@@ -79,7 +79,7 @@ Say in two sentences what the coefficient of `grammaticalityungrammatical` and t
 
 `lexical_decision_l2` has reaction times (`rt`, in ms) of 15 L1 and 15 L2 speakers of German to 40 words, with each word's log10 frequency (`log_freq`).
 
-### 2.1 Two groups, two lines
+### 2.1 One line per group
 
 Plot `rt` against `log_freq`, with one colour and one regression line per `group`. Do frequent words help both groups equally?
 

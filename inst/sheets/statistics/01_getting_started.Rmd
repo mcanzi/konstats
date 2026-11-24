@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ## Today
 
-We go through this tutorial together. Open RStudio and type along.
+Open RStudio and type along: run every piece of code yourself.
 
 1. Install `{konstats}`, the package of this course
 2. Look at `{simling}`, where the data sets of the course come from
@@ -91,7 +91,7 @@ slides("mixed models 1")
 
 ### 1.6 Exercise sheets
 
-From next week, each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer. `tutorials()` lists the sheets, and `get_tutorial()` copies one into your project folder:
+From tutorial 2 on, each tutorial has an exercise sheet: an R Markdown file with the exercises and an empty code chunk for each answer. `tutorials()` lists the sheets, and `get_tutorial()` copies one into your project folder:
 
 ```{r, eval = FALSE}
 tutorials("statistics")
@@ -102,13 +102,13 @@ get_tutorial(2, ".")
 
 You write your answers in your copy. If the sheet is already in the folder, `get_tutorial()` stops with an error, so your answers are never overwritten.
 
-### 1.7 Handing in homework
+### 1.7 Assignments
 
-Tutorials 2, 4, 8, 10 and 12 end with a weekly assignment, which you hand in on Ilias.
+Tutorials 2, 4, 8, 10 and 12 end with a weekly assignment, which has no solutions. Students at the University of Konstanz hand it in on Ilias.
 
 . . .
 
-To start the file you hand in:
+To start an assignment file:
 
 _File > New File > R Markdown > From Template > Weekly assignment (konstats)_
 
@@ -211,11 +211,11 @@ Both objects now appear in the `Environment`. Names are case sensitive: `Voiced`
 
 ### 3.3 Vectors
 
-`c()` combines values into a vector. Here are five vowel durations, in ms:
+`c()` combines values into a vector. Here are five vowel durations, in ms. Divided by 1000, they are in seconds:
 
 ```{r}
 durations <- c(166, 96, 106, 112, 101)
-durations / 1000    # in seconds
+durations / 1000
 mean(durations)
 ```
 
@@ -336,14 +336,14 @@ mean(with_gap, na.rm = TRUE)
 
 . . .
 
-Cite the software you use:
+Cite the software you use. `citation()` gives the reference for R, and `citation("simling")` the reference for a package:
 
 ```{r, eval = FALSE}
-citation()             # R
-citation("simling")    # a package
+citation()
+citation("simling")
 ```
 
-## Before next week
+## Before tutorial 2
 
 Start `swirl`, the interactive lessons from lecture 1, and choose the course _R Programming_:
 
@@ -354,7 +354,7 @@ swirl()
 
 . . .
 
-Next week: data wrangling with the tidyverse. Copy the exercise sheet into your project before the tutorial:
+Tutorial 2 is about data wrangling with the tidyverse. Copy its exercise sheet into your project before you start:
 
 ```{r, eval = FALSE}
 get_tutorial(2, ".")
